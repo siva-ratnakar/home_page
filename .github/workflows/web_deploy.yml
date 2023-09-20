@@ -19,7 +19,7 @@ jobs:
 
       - run: flutter clean
       - run: flutter pub get
-      - run: flutter build web --release
+      - run: flutter build web --web-renderer canvaskit --release
 
       # Web deploy now is contained in build/web directory
       - run: |
