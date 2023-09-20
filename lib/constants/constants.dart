@@ -69,30 +69,26 @@ class Constants {
   static const xLink = 'https://twitter.com/SivaRatnakar/';
 
   // cache images
-  static const cacheImagesPaths = [
+  static const cacheWebImagesPaths = [
     // logo
     siteTitleAnmateImagePath,
     // life
     lifeBackImagePath,
     lifeFrontImagePath,
-    lifeMobileImagePath,
     lifeMoveImagePath,
     lifeNonMoveImagePath,
     // bio blog
     bioBlogBackImagePath,
     bioBlogFrontImagePath,
-    bioBlogMobileImagePath,
     bioBlogMoveImagePath,
     bioBlogMoveTopImagePath,
     // contact
     contactBackImagePath,
     contactFrontImagePath,
-    contactMobileImagePath,
     contactMoveImagePath,
     // professional
     professionalBackImagePath,
     professionalFrontImagePath,
-    professionalMobileImagePath,
     professionalMoveImagePath,
     // social links
     facebookBlackImagePath,
@@ -107,6 +103,25 @@ class Constants {
     scholarImagePath,
     xBlackImagePath,
     xImagePath,
+  ];
+  static const cacheMobileImagesPaths = [
+    // logo
+    siteTitleAnmateImagePath,
+    // life
+    lifeMobileImagePath,
+    // bio blog
+    bioBlogMobileImagePath,
+    // contact
+    contactMobileImagePath,
+    // professional
+    professionalMobileImagePath,
+    // social links
+    facebookBlackImagePath,
+    githubBlackImagePath,
+    instagramBlackImagePath,
+    linkedInBlackImagePath,
+    scholarBlackImagePath,
+    xBlackImagePath,
   ];
 
   // ! - DON'T TOUCH

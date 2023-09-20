@@ -22,7 +22,9 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   precacheImages() {
-    const imagePaths = Constants.cacheImagesPaths;
+    final imagePaths = PlatformHelper.isWebMobile
+        ? Constants.cacheMobileImagesPaths
+        : Constants.cacheWebImagesPaths;
     for (var image in imagePaths) {
       precacheImage(Image.asset(image).image, context);
     }
