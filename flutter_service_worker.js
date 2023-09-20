@@ -57,10 +57,10 @@ const RESOURCES = {"canvaskit/chromium/canvaskit.js": "96ae916cd2d1b7320fff853ee
 "icons/Icon-maskable-512.png": "75ba04b092217388a60319922efcdfd6",
 "icons/Icon-512.png": "649f28c9e93e0d8dbb4379a7813431d6",
 "flutter.js": "6fef97aeca90b426343ba6c5c9dc5d4a",
-"index.html": "c96e90aae11d1f6351e8c630f948a75b",
-"/": "c96e90aae11d1f6351e8c630f948a75b",
+"index.html": "4d28c571442609a0a81b853e4154beac",
+"/": "4d28c571442609a0a81b853e4154beac",
 "favicon.png": "f07d038905337240193e7bd4f9a4c2e9",
-"main.dart.js": "e57666d4f7e6efa9176cf7b4da972306",
+"main.dart.js": "0c834c0bdd21b62707e4b41bb4418303",
 "favicon-32.png": "34eb955d6115367039705408d78a5b0b",
 "manifest.json": "1fae6afac09b895a49d018b888e9f09f"};
 // The application shell files that are downloaded before a service worker can
