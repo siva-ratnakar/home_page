@@ -35,7 +35,7 @@ const RESOURCES = {"canvaskit/chromium/canvaskit.js": "96ae916cd2d1b7320fff853ee
 "assets/images/Life_move.png": "f7222619d1280a02f8f4d3c5ce9bd216",
 "assets/images/bioblog_mobile.png": "e53fae2516aaae3bc1e1fc6271c08ea7",
 "assets/images/professional_front.png": "f7cab7afab9f00695e94d33723c13768",
-"assets/images/life_mobile.png": "551db27939287d34215e0ee2627f1368",
+"assets/images/life_mobile.png": "34cb09dfc99b4918c9f74139785e5989",
 "assets/images/life_top.png": "9f186c3636dccc41abc0bf7128d7ce3d",
 "assets/images/professional_move.png": "10688eff6614d20f7a01179620f84990",
 "assets/images/life_back.png": "4b5629e369c99306f799ef740ebdb464",
@@ -57,10 +57,10 @@ const RESOURCES = {"canvaskit/chromium/canvaskit.js": "96ae916cd2d1b7320fff853ee
 "icons/Icon-maskable-512.png": "75ba04b092217388a60319922efcdfd6",
 "icons/Icon-512.png": "649f28c9e93e0d8dbb4379a7813431d6",
 "flutter.js": "6fef97aeca90b426343ba6c5c9dc5d4a",
-"index.html": "678174f685aa93a38a8ccf53dab2d98f",
-"/": "678174f685aa93a38a8ccf53dab2d98f",
+"index.html": "c96e90aae11d1f6351e8c630f948a75b",
+"/": "c96e90aae11d1f6351e8c630f948a75b",
 "favicon.png": "f07d038905337240193e7bd4f9a4c2e9",
-"main.dart.js": "d2bb01ba797415adc733a3c40234147e",
+"main.dart.js": "e57666d4f7e6efa9176cf7b4da972306",
 "favicon-32.png": "34eb955d6115367039705408d78a5b0b",
 "manifest.json": "1fae6afac09b895a49d018b888e9f09f"};
 // The application shell files that are downloaded before a service worker can
