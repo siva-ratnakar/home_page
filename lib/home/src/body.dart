@@ -47,13 +47,6 @@ class PortraitBody extends StatelessWidget {
               mainAxisCellCount: 4,
               child: NameCircle(),
             ),
-            // Top 2 circles start
-            // StaggeredGridTile.count(
-            //   crossAxisCellCount: 3,
-            //   mainAxisCellCount: 4,
-            //   child: SizedBox(),
-            // ),
-
             StaggeredGridTile.count(
               crossAxisCellCount: 4,
               mainAxisCellCount: 4,
@@ -69,35 +62,11 @@ class PortraitBody extends StatelessWidget {
               mainAxisCellCount: 4,
               child: BioBlogCircle(),
             ),
-            // StaggeredGridTile.count(
-            //   crossAxisCellCount: 4,
-            //   mainAxisCellCount: 2,
-            //   child: SizedBox(),
-            // ),
-            // StaggeredGridTile.count(
-            //   crossAxisCellCount: 3,
-            //   mainAxisCellCount: 4,
-            //   child: SizedBox(),
-            // ),
-            // Top 2 circles end
-            // Middle 1 circle start
-            // StaggeredGridTile.count(
-            //   crossAxisCellCount: 7,
-            //   mainAxisCellCount: 1,
-            //   child: SizedBox(),
-            // ),
             StaggeredGridTile.count(
               crossAxisCellCount: 4,
               mainAxisCellCount: 1,
               child: SizedBox(),
             ),
-            // StaggeredGridTile.count(
-            //   crossAxisCellCount: 6,
-            //   mainAxisCellCount: 1,
-            //   child: SizedBox(),
-            // ),
-            // Middle 1 circle end
-            // Bottom 2 circles start
             StaggeredGridTile.count(
               crossAxisCellCount: 4,
               mainAxisCellCount: 4,
@@ -108,17 +77,11 @@ class PortraitBody extends StatelessWidget {
               mainAxisCellCount: 1,
               child: SizedBox(),
             ),
-            // StaggeredGridTile.count(
-            //   crossAxisCellCount: 10,
-            //   mainAxisCellCount: 2,
-            //   child: SizedBox(),
-            // ),
             StaggeredGridTile.count(
               crossAxisCellCount: 4,
               mainAxisCellCount: 4,
               child: ProfessionalCircle(),
             ),
-            // Bottom 2 circles end
           ],
         ),
       ),
@@ -208,7 +171,8 @@ class ProfessionalCircle extends StatelessWidget {
   Widget build(BuildContext context) {
     return CircleWrapper(
       child: MouseRegion(
-        cursor: SystemMouseCursors.click,
+        // cursor: SystemMouseCursors.click,
+        // TODO: Add link here
         child: Builder(builder: (context) {
           if (PlatformHelper.isWebMobile) {
             return const BigWidgetWrapper(
@@ -245,7 +209,8 @@ class ContactCircle extends StatelessWidget {
   Widget build(BuildContext context) {
     return CircleWrapper(
       child: MouseRegion(
-        cursor: SystemMouseCursors.click,
+        // cursor: SystemMouseCursors.click,
+        // TODO: Add link here
         child: Builder(builder: (context) {
           if (PlatformHelper.isWebMobile) {
             return const BigWidgetWrapper(
