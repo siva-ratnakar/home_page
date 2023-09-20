@@ -13,8 +13,27 @@ part 'src/footer.dart';
 part 'src/header.dart';
 part 'src/widgets.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  precacheImages() {
+    const imagePaths = Constants.cacheImagesPaths;
+    for (var image in imagePaths) {
+      precacheImage(Image.asset(image).image, context);
+    }
+  }
+
+  @override
+  void didChangeDependencies() {
+    // pre cache all images needed
+    precacheImages();
+    super.didChangeDependencies();
+  }
 
   @override
   Widget build(BuildContext context) {

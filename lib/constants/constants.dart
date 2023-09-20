@@ -68,6 +68,47 @@ class Constants {
   static const xBlackImagePath = 'images/social/x_black.png';
   static const xLink = 'https://twitter.com/SivaRatnakar/';
 
+  // cache images
+  static const cacheImagesPaths = [
+    // logo
+    siteTitleAnmateImagePath,
+    // life
+    lifeBackImagePath,
+    lifeFrontImagePath,
+    lifeMobileImagePath,
+    lifeMoveImagePath,
+    lifeNonMoveImagePath,
+    // bio blog
+    bioBlogBackImagePath,
+    bioBlogFrontImagePath,
+    bioBlogMobileImagePath,
+    bioBlogMoveImagePath,
+    bioBlogMoveTopImagePath,
+    // contact
+    contactBackImagePath,
+    contactFrontImagePath,
+    contactMobileImagePath,
+    contactMoveImagePath,
+    // professional
+    professionalBackImagePath,
+    professionalFrontImagePath,
+    professionalMobileImagePath,
+    professionalMoveImagePath,
+    // social links
+    facebookBlackImagePath,
+    facebookImagePath,
+    githubBlackImagePath,
+    githubImagePath,
+    instagramBlackImagePath,
+    instagramImagePath,
+    linkedInBlackImagePath,
+    linkedInImagePath,
+    scholarBlackImagePath,
+    scholarImagePath,
+    xBlackImagePath,
+    xImagePath,
+  ];
+
   // ! - DON'T TOUCH
   static const double bigWidgetSize = 9000;
 }
