@@ -96,8 +96,8 @@ class _FooterIconState extends State<FooterIcon> {
     _hovered = false;
     _isWebMobile = PlatformHelper.isWebMobile;
 
-    // set to color social images when on mobile
-    if (_isWebMobile) _hovered = true;
+    // set to b/w social images when on mobile
+    if (_isWebMobile) _hovered = false;
   }
 
   setHoveredWeb(bool hovered) {
