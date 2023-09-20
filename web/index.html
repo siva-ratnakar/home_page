@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!--
+    If you are serving your web app in a path other than the root, change the
+    href value below to reflect the base path you are serving from.
+
+    The path provided below has to start and end with a slash "/" in order for
+    it to work correctly.
+
+    For more details:
+    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
+
+    This is a placeholder for base href that will be replaced by the value of
+    the `--base-href` argument provided to `flutter build`.
+  -->
+  <base href="$FLUTTER_BASE_HREF">
+
+  <meta charset="UTF-8">
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="description" content="Portfolio website of Siva Ratnakar Immadi.">
+
+  <!-- iOS meta tags & icons -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="Siva Ratnakar Immadi">
+  <link rel="apple-touch-icon" href="icons/Icon-192.png">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="favicon.png"/>
+
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon.png">
+
+  <title>Siva Ratnakar Immadi</title>
+  <link rel="manifest" href="manifest.json">
+
+  <!-- Background color -->
+  <style>
+    body{
+      background-color: #FFF;
+    }
+  </style>
+
+  <script>
+    // The value below is injected by flutter build, do not touch.
+    const serviceWorkerVersion = null;
+  </script>
+
+  <!-- The below is shown before flutter initializes -->
+  <div id="loading">
+    <style>
+      .center {
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      /* The below inside this css is the actual loading indicator */
+      /* taken from https://cssloaders.github.io */
+      .loader {
+        width: 24px;
+        height: 80px;
+        display: block;
+        margin: 35px auto 0;
+        border: 1px solid #000;
+        border-radius: 0 0 50px 50px;
+        position: relative;
+        box-shadow: 0px 0px #000 inset;
+        background-image: linear-gradient(#000 100px, transparent 0);
+        background-position: 0px 0px;
+        background-size: 22px 80px;
+        background-repeat: no-repeat;
+        box-sizing: border-box;
+        animation: animloader 6s linear infinite;
+      }
+      .loader::after {
+        content: '';  
+        box-sizing: border-box;
+        top: -6px;
+        left: 50%;
+        transform: translateX(-50%);
+        position: absolute;
+        border: 1px solid #000;
+        border-radius: 50%;
+        width: 28px;
+        height: 6px;
+      }
+      .loader::before {
+        content: '';  
+        box-sizing: border-box;
+        left: 0;
+        bottom: -4px;
+        border-radius: 50%;
+        position: absolute;
+        width: 6px;
+        height: 6px;
+        animation: animloader1 6s linear infinite;
+      }
+
+      @keyframes animloader {
+        0% {
+          background-position: 0px 80px;
+        }
+        100% {
+          background-position: 0px 0px;
+        }
+      }
+
+      @keyframes animloader1 {
+        0% {
+          box-shadow: 4px -10px rgba(0, 0, 0, 0), 6px 0px rgba(0, 0, 0, 0), 8px -15px rgba(0, 0, 0, 0), 12px 0px rgba(0, 0, 0, 0);
+        }
+        20% {
+          box-shadow: 4px -20px rgba(0, 0, 0, 0), 8px -10px rgba(0, 0, 0, 0), 10px -30px rgba(0, 0, 0, 0.5), 15px -5px rgba(0, 0, 0, 0);
+        }
+        40% {
+          box-shadow: 2px -40px rgba(0, 0, 0, 0.5), 8px -30px rgba(0, 0, 0, 0.4), 8px -60px rgba(0, 0, 0, 0.5), 12px -15px rgba(0, 0, 0, 0.5);
+        }
+        60% {
+          box-shadow: 4px -60px rgba(0, 0, 0, 0.5), 6px -50px rgba(0, 0, 0, 0.4), 10px -90px rgba(0, 0, 0, 0.5), 15px -25px rgba(0, 0, 0, 0.5);
+        }
+        80% {
+          box-shadow: 2px -80px rgba(0, 0, 0, 0.5), 4px -70px rgba(0, 0, 0, 0.4), 8px -120px rgba(0, 0, 0, 0), 12px -35px rgba(0, 0, 0, 0.5);
+        }
+        100% {
+          box-shadow: 4px -100px rgba(0, 0, 0, 0), 8px -90px rgba(0, 0, 0, 0), 10px -120px rgba(0, 0, 0, 0), 15px -45px rgba(0, 0, 0, 0);
+        }
+      }
+    </style>
+    <div class="center">
+      <span class="loader"></span>
+    </div>
+  </div>
+
+  <!-- This script adds the flutter initialization JS code -->
+  <script src="flutter.js" defer></script>
+</head>
+<body>
+  <script>
+    window.addEventListener('load', function(ev) {
+      // select loading div into a variable
+      var loading = document.querySelector('#loading');
+      // Download main.dart.js
+      _flutter.loader.loadEntrypoint({
+        serviceWorker: {
+          serviceWorkerVersion: serviceWorkerVersion,
+        },
+        onEntrypointLoaded: function(engineInitializer) {
+          engineInitializer.initializeEngine().then(function(appRunner) {
+            // remove the loading div after flutter is initialized
+            loading.remove();
+            appRunner.runApp();
+          });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
