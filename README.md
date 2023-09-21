@@ -5,3 +5,8 @@
 A web application - portfolio site of Siva Ratnakar Immadi - built in Flutter.
 
 [sivaratnakar.com](https://sivaratnakar.com)
+
+### Credits
+
+Design by: [@siva-ratnakar](https://github.com/siva-ratnakar)
+Built by: [@immadisairaj](https://github.com/immadisairaj)
