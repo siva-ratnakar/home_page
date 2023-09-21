@@ -26,8 +26,7 @@ class _HomePageState extends State<HomePage> {
         ? Constants.cacheMobileImagesPaths
         : Constants.cacheWebImagesPaths;
     for (var image in imagePaths) {
-      // Commenting for testing if pre load works fine when deployed
-      // precacheImage(Image.asset(image).image, context);
+      precacheImage(Image.asset(image).image, context);
     }
   }
 
