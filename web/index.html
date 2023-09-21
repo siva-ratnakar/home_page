@@ -43,13 +43,6 @@
   <title>Siva Ratnakar Immadi</title>
   <link rel="manifest" href="manifest.json">
 
-  <!-- Background color -->
-  <style>
-    body{
-      background-color: #FFF;
-    }
-  </style>
-
   <script>
     // The value below is injected by flutter build, do not touch.
     const serviceWorkerVersion = null;
@@ -69,74 +62,57 @@
       /* The below inside this css is the actual loading indicator */
       /* taken from https://cssloaders.github.io */
       .loader {
-        width: 24px;
-        height: 80px;
-        display: block;
-        margin: 35px auto 0;
-        border: 1px solid #000;
-        border-radius: 0 0 50px 50px;
+        font-size:48px;
+        color: #000;
+        width: 1em;
+        height: 1em;
+        box-sizing: border-box;
+        background-color: currentcolor;
         position: relative;
-        box-shadow: 0px 0px #000 inset;
-        background-image: linear-gradient(#000 100px, transparent 0);
-        background-position: 0px 0px;
-        background-size: 22px 80px;
-        background-repeat: no-repeat;
-        box-sizing: border-box;
-        animation: animloader 6s linear infinite;
-        animation-direction: alternate;
-      }
-      .loader::after {
-        content: '';  
-        box-sizing: border-box;
-        top: -6px;
-        left: 50%;
-        transform: translateX(-50%);
-        position: absolute;
-        border: 1px solid #000;
         border-radius: 50%;
-        width: 28px;
-        height: 6px;
+        transform: rotateX(-60deg) perspective(1000px);
       }
-      .loader::before {
-        content: '';  
+      .loader:before,
+      .loader:after {
+        content: '';
+        display: block;
+        position: absolute;
         box-sizing: border-box;
+        top: 0;
         left: 0;
-        bottom: -4px;
-        border-radius: 50%;
-        position: absolute;
-        width: 6px;
-        height: 6px;
-        animation: animloader1 6s linear infinite;
-        animation-direction: alternate;
+        width: inherit;
+        height: inherit;
+        border-radius: inherit;
+        animation: flowerFlow 1s ease-out infinite;
+      }
+      .loader:after {
+        animation-delay: .4s;
       }
 
-      @keyframes animloader {
+      @keyframes flowerFlow {
         0% {
-          background-position: 0px 80px;
+          opacity: 1;
+          transform: rotate(0deg);
+          box-shadow: 0 0 0 -.5em currentcolor,
+          0 0 0 -.5em currentcolor,
+          0 0 0 -.5em currentcolor,
+          0 0 0 -.5em currentcolor,
+          0 0 0 -.5em currentcolor,
+          0 0 0 -.5em currentcolor,
+          0 0 0 -.5em currentcolor,
+          0 0 0 -.5em currentcolor;
         }
         100% {
-          background-position: 0px 0px;
-        }
-      }
-
-      @keyframes animloader1 {
-        0% {
-          box-shadow: 4px -10px rgba(0, 0, 0, 0), 6px 0px rgba(0, 0, 0, 0), 8px -15px rgba(0, 0, 0, 0), 12px 0px rgba(0, 0, 0, 0);
-        }
-        20% {
-          box-shadow: 4px -20px rgba(0, 0, 0, 0), 8px -10px rgba(0, 0, 0, 0), 10px -30px rgba(0, 0, 0, 0.5), 15px -5px rgba(0, 0, 0, 0);
-        }
-        40% {
-          box-shadow: 2px -40px rgba(0, 0, 0, 0.5), 8px -30px rgba(0, 0, 0, 0.4), 8px -60px rgba(0, 0, 0, 0.5), 12px -15px rgba(0, 0, 0, 0.5);
-        }
-        60% {
-          box-shadow: 4px -60px rgba(0, 0, 0, 0.5), 6px -50px rgba(0, 0, 0, 0.4), 10px -90px rgba(0, 0, 0, 0.5), 15px -25px rgba(0, 0, 0, 0.5);
-        }
-        80% {
-          box-shadow: 2px -80px rgba(0, 0, 0, 0.5), 4px -70px rgba(0, 0, 0, 0.4), 8px -120px rgba(0, 0, 0, 0), 12px -35px rgba(0, 0, 0, 0.5);
-        }
-        100% {
-          box-shadow: 4px -100px rgba(0, 0, 0, 0), 8px -90px rgba(0, 0, 0, 0), 10px -120px rgba(0, 0, 0, 0), 15px -45px rgba(0, 0, 0, 0);
+          opacity: 0;
+          transform: rotate(180deg);
+          box-shadow: -1em -1em 0 -.35em currentcolor,
+          0 -1.5em 0 -.35em currentcolor,
+          1em -1em 0 -.35em currentcolor,
+          -1.5em 0 0 -.35em currentcolor,
+          1.5em -0 0 -.35em currentcolor,
+          -1em 1em 0 -.35em currentcolor,
+          0 1.5em 0 -.35em currentcolor,
+          1em 1em 0 -.35em currentcolor;
         }
       }
     </style>
@@ -150,6 +126,13 @@
   <script src="flutter.js" defer></script>
 </head>
 <body>
+  <!-- Background color -->
+  <style>
+    body{
+      background-color: #FFF;
+    }
+  </style>
+  <!-- Preload things -->
   <script>
     (function() {
       // select loading div into a variable
