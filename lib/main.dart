@@ -14,6 +14,7 @@ class MyApp extends StatelessWidget {
       title: 'Siva Ratnakar Immadi',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        primaryColor: const Color(0xFF6D6EAD),
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.black),
         // colorScheme: const ColorScheme(
         //   brightness: Brightness.light,
