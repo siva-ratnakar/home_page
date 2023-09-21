@@ -45,7 +45,7 @@
 
   <script>
     // The value below is injected by flutter build, do not touch.
-    const serviceWorkerVersion = "288950434";
+    const serviceWorkerVersion = "2730416899";
   </script>
 
   <!-- The below is shown before flutter initializes -->
@@ -57,6 +57,9 @@
         justify-content: center;
         align-items: center;
         flex-direction: column;
+      }
+      .text-percentage {
+        padding-top: 13px;
       }
       .text {
         color: #000;
@@ -102,7 +105,7 @@
     </style>
     <div class="center">
       <div class="loader"></div>
-      <span id="percentage">0%</span>
+      <span class="text-percentage" id="percentage">0%</span>
       <p class="text">Good things take time</p>
     </div>
   </div>
