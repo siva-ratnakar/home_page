@@ -40,6 +40,7 @@ class Constants {
   static const contactBackImagePath = 'images/contact_back.png';
   static const contactMoveImagePath = 'images/contact_move.png';
   static const contactMobileImagePath = 'images/contact_mobile.png';
+  static const contactUrl = 'https://sivaratnakar.com/contact.html';
 
   // Home Professional component related constants
   static const professionalFrontImagePath = 'images/professional_front.png';

@@ -209,30 +209,36 @@ class ContactCircle extends StatelessWidget {
   Widget build(BuildContext context) {
     return CircleWrapper(
       child: MouseRegion(
-        // cursor: SystemMouseCursors.click,
-        // TODO: Add link here
-        child: Builder(builder: (context) {
-          if (PlatformHelper.isWebMobile) {
-            return const BigWidgetWrapper(
-                child: ImageWithAsset(asset: Constants.contactMobileImagePath));
-          }
-          return const FlipAnimation(
-            towardsLeft: false,
-            front: BigWidgetWrapper(
-                child: ImageWithAsset(asset: Constants.contactFrontImagePath)),
-            back: MoveWrapper(
-              isMovableOnTop: true,
-              moveOnlyLeftRight: true,
-              moveOffset: 25,
-              movable: BigWidgetWrapper(
-                  isTransparent: true,
-                  isNotClippable: true,
-                  child: ImageWithAsset(asset: Constants.contactMoveImagePath)),
-              nonMovable: BigWidgetWrapper(
-                  child: ImageWithAsset(asset: Constants.contactBackImagePath)),
-            ),
-          );
-        }),
+        cursor: SystemMouseCursors.click,
+        child: GestureDetector(
+          onTap: () => LinksHelper.openInNewTab(Constants.contactUrl),
+          child: Builder(builder: (context) {
+            if (PlatformHelper.isWebMobile) {
+              return const BigWidgetWrapper(
+                  child:
+                      ImageWithAsset(asset: Constants.contactMobileImagePath));
+            }
+            return const FlipAnimation(
+              towardsLeft: false,
+              front: BigWidgetWrapper(
+                  child:
+                      ImageWithAsset(asset: Constants.contactFrontImagePath)),
+              back: MoveWrapper(
+                isMovableOnTop: true,
+                moveOnlyLeftRight: true,
+                moveOffset: 25,
+                movable: BigWidgetWrapper(
+                    isTransparent: true,
+                    isNotClippable: true,
+                    child:
+                        ImageWithAsset(asset: Constants.contactMoveImagePath)),
+                nonMovable: BigWidgetWrapper(
+                    child:
+                        ImageWithAsset(asset: Constants.contactBackImagePath)),
+              ),
+            );
+          }),
+        ),
       ),
     );
   }
