@@ -3,8 +3,10 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:go_router/go_router.dart';
 import 'package:siva_website/constants/constants.dart';
 import 'package:siva_website/helper.dart';
+import 'package:siva_website/router.dart';
 
 part 'src/body.dart';
 part 'src/components.dart';

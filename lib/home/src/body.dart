@@ -171,30 +171,32 @@ class ProfessionalCircle extends StatelessWidget {
   Widget build(BuildContext context) {
     return CircleWrapper(
       child: MouseRegion(
-        // cursor: SystemMouseCursors.click,
-        // TODO: Add link here
-        child: Builder(builder: (context) {
-          if (PlatformHelper.isWebMobile) {
-            return const BigWidgetWrapper(
-                child: ImageWithAsset(
-                    asset: Constants.professionalMobileImagePath));
-          }
-          return const FlipAnimation(
-            front: BigWidgetWrapper(
-                child: ImageWithAsset(
-                    asset: Constants.professionalFrontImagePath)),
-            back: MoveWrapper(
-              movable: BigWidgetWrapper(
-                  isNotClippable: true,
+        cursor: SystemMouseCursors.click,
+        child: GestureDetector(
+          onTap: () => context.go(NavigationRoutes.professional.path),
+          child: Builder(builder: (context) {
+            if (PlatformHelper.isWebMobile) {
+              return const BigWidgetWrapper(
                   child: ImageWithAsset(
-                      asset: Constants.professionalMoveImagePath)),
-              nonMovable: BigWidgetWrapper(
-                  isTransparent: true,
+                      asset: Constants.professionalMobileImagePath));
+            }
+            return const FlipAnimation(
+              front: BigWidgetWrapper(
                   child: ImageWithAsset(
-                      asset: Constants.professionalBackImagePath)),
-            ),
-          );
-        }),
+                      asset: Constants.professionalFrontImagePath)),
+              back: MoveWrapper(
+                movable: BigWidgetWrapper(
+                    isNotClippable: true,
+                    child: ImageWithAsset(
+                        asset: Constants.professionalMoveImagePath)),
+                nonMovable: BigWidgetWrapper(
+                    isTransparent: true,
+                    child: ImageWithAsset(
+                        asset: Constants.professionalBackImagePath)),
+              ),
+            );
+          }),
+        ),
       ),
     );
   }
