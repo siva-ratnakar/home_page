@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:siva_website/helper.dart';
+import 'package:siva_website/utils/helper.dart';
 
 class ProfessionalPage extends StatelessWidget {
   const ProfessionalPage({super.key});
@@ -7,6 +7,8 @@ class ProfessionalPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // TODO(immadisairaj): add click to go home (check nav stack then go?)
+      // TODO(immadisairaj): add clicks to scroll to that section position
       appBar: AppBar(
         title: const Text('Professional'),
       ),
@@ -19,6 +21,13 @@ class ProfessionalPage extends StatelessWidget {
           useMagnifier: true,
           magnification: 1.25,
           itemExtent: MediaQuery.sizeOf(context).height * 0.8,
+          // TODO(immadisairaj): update page to show dynamic data
+          // childDelegate: ListWheelChildBuilderDelegate(
+          //   childCount: <get_count_dynamic>,
+          //   builder: (context, index) {
+          //     return const Placeholder();
+          //   },
+          // ),
           children: [
             Container(
               width: MediaQuery.sizeOf(context).width * 0.8,

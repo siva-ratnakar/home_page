@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:siva_website/router.dart';
+import 'package:siva_website/utils/router.dart';
 
 void main() {
   runApp(const MyApp());
