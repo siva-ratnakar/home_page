@@ -13,6 +13,7 @@ class Constants {
   // Title related constants
   static const String siteTitleFontFamily = 'IrishGrover';
   static const double titleBottomBorderWidth = 1.0;
+  static const String siteProfessionalTitleFontFamily = 'BungeeShade';
 
   // Home components related constants
   static const String siteNameFontFamily = 'Papyrus';

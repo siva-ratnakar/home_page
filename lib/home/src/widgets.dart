@@ -1,17 +1,5 @@
 part of '../home.dart';
 
-class WholeDivider extends StatelessWidget {
-  const WholeDivider({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: Constants.titleBottomBorderWidth,
-      color: Theme.of(context).colorScheme.onBackground,
-    );
-  }
-}
-
 class NameBack extends StatelessWidget {
   const NameBack({super.key});
 
