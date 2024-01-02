@@ -13,12 +13,15 @@ class Constants {
   // Title related constants
   static const String siteTitleFontFamily = 'IrishGrover';
   static const double titleBottomBorderWidth = 1.0;
-  static const String siteProfessionalTitleFontFamily = 'BungeeShade';
 
   // Home components related constants
   static const String siteNameFontFamily = 'Papyrus';
   static const double homeCircleBorderWidth = 3.0;
   static const Duration defaultDuration = Duration(milliseconds: 300);
+
+  // Professional page related constants
+  static const String siteProfessionalTitleFontFamily = 'BungeeShade';
+  static const String resumePathName = 'CV_Siva_Ratnakar.pdf';
 
   // Home Life component related constants
   static const lifeFrontImagePath = 'images/life_front.png';
