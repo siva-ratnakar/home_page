@@ -31,24 +31,31 @@ class ProfessionalHeader extends StatelessWidget {
                       tooltip: 'Go Home!',
                     ),
                   ),
-                  FittedBox(
-                    child: SizedBox(
-                      height: 60,
-                      width: 800,
-                      child: Center(
-                        child: DefaultTextStyle(
-                          style: Theme.of(context)
-                              .textTheme
-                              .displayLarge!
-                              .copyWith(
-                                fontFamily:
-                                    Constants.siteProfessionalTitleFontFamily,
-                                fontWeight: FontWeight.w500,
-                                letterSpacing: Constants.siteTitleLetterSpacing,
-                                color: Colors.white,
-                              ),
-                          child: const Text('Professional'),
-                          // child: const TitleTextWidget(),
+                  Flexible(
+                    flex: 1,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8),
+                      child: FittedBox(
+                        child: SizedBox(
+                          height: 60,
+                          width: 680,
+                          child: Center(
+                            child: DefaultTextStyle(
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .displayLarge!
+                                  .copyWith(
+                                    fontFamily: Constants
+                                        .siteProfessionalTitleFontFamily,
+                                    fontWeight: FontWeight.w500,
+                                    letterSpacing:
+                                        Constants.siteTitleLetterSpacing,
+                                    color: Colors.white,
+                                  ),
+                              child: const Text('Professional'),
+                              // child: const TitleTextWidget(),
+                            ),
+                          ),
                         ),
                       ),
                     ),
@@ -87,7 +94,7 @@ class TitleIconButtonWrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Flexible(
-      flex: 1,
+      flex: 0,
       fit: FlexFit.loose,
       child: FittedBox(
         child: SizedBox(
