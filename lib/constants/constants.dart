@@ -21,7 +21,7 @@ class Constants {
 
   // Professional page related constants
   static const String siteProfessionalTitleFontFamily = 'BungeeShade';
-  static const String resumePathName = 'CV_Siva_Ratnakar.pdf';
+  static const String resumePathName = 'Siva_CV.pdf';
 
   // Home Life component related constants
   static const lifeFrontImagePath = 'images/life_front.png';

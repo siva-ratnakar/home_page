@@ -4,6 +4,7 @@ class ProfessionalHeader extends StatelessWidget {
   const ProfessionalHeader({super.key});
 
   final _iconColor = Colors.white;
+  final _iconSize = 38.0;
   final _iconButtonPadding = EdgeInsets.zero;
 
   @override
@@ -18,6 +19,7 @@ class ProfessionalHeader extends StatelessWidget {
           Expanded(
             child: Padding(
               padding: const EdgeInsets.all(8.0),
+              // padding: EdgeInsets.zero,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -28,6 +30,7 @@ class ProfessionalHeader extends StatelessWidget {
                       padding: _iconButtonPadding,
                       icon: const Icon(Icons.home_outlined),
                       color: _iconColor,
+                      iconSize: _iconSize,
                       tooltip: 'Go Home!',
                     ),
                   ),
@@ -36,8 +39,9 @@ class ProfessionalHeader extends StatelessWidget {
                     child: Padding(
                       padding: const EdgeInsets.all(8),
                       child: FittedBox(
+                        // TODO(immadisairaj): adjust sizes once font is fixed
                         child: SizedBox(
-                          height: 60,
+                          height: 53,
                           width: 680,
                           child: Center(
                             child: DefaultTextStyle(
@@ -68,6 +72,7 @@ class ProfessionalHeader extends StatelessWidget {
                       },
                       padding: _iconButtonPadding,
                       icon: const Icon(CupertinoIcons.doc_text),
+                      iconSize: _iconSize,
                       color: _iconColor,
                       tooltip: 'View CV/Resumé',
                     ),
@@ -97,6 +102,7 @@ class TitleIconButtonWrapper extends StatelessWidget {
       flex: 0,
       fit: FlexFit.loose,
       child: FittedBox(
+        // TODO(immadisairaj): adjust sizes once font is fixed
         child: SizedBox(
           height: 60,
           width: 60,
