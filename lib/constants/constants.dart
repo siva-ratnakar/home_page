@@ -20,8 +20,8 @@ class Constants {
   static const Duration defaultDuration = Duration(milliseconds: 300);
 
   // Professional page related constants
-  static const String siteProfessionalTitleFontFamily = 'BungeeShade';
-  static const String resumePathName = 'Siva_CV.pdf';
+  static const String siteProfessionalTitleFontFamily = 'RubikDoodleShadow';
+  static const String resumePathName = 'cv.pdf';
 
   // Home Life component related constants
   static const lifeFrontImagePath = 'images/life_front.png';

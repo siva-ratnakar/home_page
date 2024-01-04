@@ -24,8 +24,11 @@ class ProfessionalBody extends StatelessWidget {
         children: [
           Container(
             width: MediaQuery.sizeOf(context).width * 0.8,
-            color: Colors.red,
-            child: const UnderConstruction(),
+            color: Colors.white,
+            child: const UnderConstruction(
+              color: Colors.black12,
+              textColor: Colors.black,
+            ),
           ),
           Container(
             width: MediaQuery.sizeOf(context).width * 0.8,

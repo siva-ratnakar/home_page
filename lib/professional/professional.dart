@@ -32,20 +32,27 @@ class ProfessionalPage extends StatelessWidget {
 }
 
 class UnderConstruction extends StatelessWidget {
-  const UnderConstruction({super.key});
+  const UnderConstruction({
+    super.key,
+    this.color = Colors.white12,
+    this.textColor = Colors.white,
+  });
+
+  final Color color;
+  final Color textColor;
 
   @override
   Widget build(BuildContext context) {
-    return const Stack(
+    return Stack(
       children: [
         Placeholder(
-          color: Colors.white12,
+          color: color,
         ),
         Center(
           child: Text(
             'Please wait while we are building for you!',
             style: TextStyle(
-              color: Colors.white,
+              color: textColor,
               fontSize: 16,
             ),
           ),

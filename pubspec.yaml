@@ -88,9 +88,9 @@ flutter:
     - family: IrishGrover
       fonts:
         - asset: fonts/IrishGrover.ttf
-    - family: BungeeShade
+    - family: RubikDoodleShadow
       fonts:
-        - asset: fonts/BungeeShade.ttf
+        - asset: fonts/RubikDoodleShadow.ttf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro

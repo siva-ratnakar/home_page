@@ -3,14 +3,15 @@ part of '../professional.dart';
 class ProfessionalHeader extends StatelessWidget {
   const ProfessionalHeader({super.key});
 
-  final _iconColor = Colors.white;
+  final _foregroundColor = Colors.white;
+  final _backgroundCOlor = Colors.black;
   final _iconSize = 38.0;
   final _iconButtonPadding = EdgeInsets.zero;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.black,
+      color: _backgroundCOlor,
       height: MediaQuery.sizeOf(context).height * 0.1,
       child: Column(
         mainAxisSize: MainAxisSize.max,
@@ -29,7 +30,7 @@ class ProfessionalHeader extends StatelessWidget {
                       onPressed: () => context.go(NavigationRoutes.home.path),
                       padding: _iconButtonPadding,
                       icon: const Icon(Icons.home_outlined),
-                      color: _iconColor,
+                      color: _foregroundColor,
                       iconSize: _iconSize,
                       tooltip: 'Go Home!',
                     ),
@@ -41,7 +42,7 @@ class ProfessionalHeader extends StatelessWidget {
                       child: FittedBox(
                         // TODO(immadisairaj): adjust sizes once font is fixed
                         child: SizedBox(
-                          height: 53,
+                          height: 60,
                           width: 680,
                           child: Center(
                             child: DefaultTextStyle(
@@ -54,7 +55,7 @@ class ProfessionalHeader extends StatelessWidget {
                                     fontWeight: FontWeight.w500,
                                     letterSpacing:
                                         Constants.siteTitleLetterSpacing,
-                                    color: Colors.white,
+                                    color: _foregroundColor,
                                   ),
                               child: const Text('Professional'),
                               // child: const TitleTextWidget(),
@@ -73,7 +74,7 @@ class ProfessionalHeader extends StatelessWidget {
                       padding: _iconButtonPadding,
                       icon: const Icon(CupertinoIcons.doc_text),
                       iconSize: _iconSize,
-                      color: _iconColor,
+                      color: _foregroundColor,
                       tooltip: 'View CV/Resumé',
                     ),
                   ),
