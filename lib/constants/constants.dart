@@ -1,3 +1,5 @@
+import 'package:siva_website/professional/src/classes.dart';
+
 class Constants {
   // Owner related constants
   // static const String siteTitle = 'The Curious Explorer';
@@ -22,6 +24,26 @@ class Constants {
   // Professional page related constants
   static const String siteProfessionalTitleFontFamily = 'RubikDoodleShadow';
   static const String resumePathName = 'cv.pdf';
+  // ! This should have at least one item
+  static const List<ProfessionalItem> professionalItems = [
+    // TODO(immadisairaj): add items also for carousel
+    ProfessionalItem(
+      title: 'Awards',
+      iconImagePath: professionalAwardsImagePath,
+    ),
+    ProfessionalItem(
+      title: 'Education',
+      iconImagePath: professionalEducationImagePath,
+    ),
+    ProfessionalItem(
+      title: 'Experience',
+      iconImagePath: professionalExperienceImagePath,
+    ),
+    ProfessionalItem(
+      title: 'Publications',
+      iconImagePath: professionalPublicationsImagePath,
+    ),
+  ];
 
   // Home Life component related constants
   static const lifeFrontImagePath = 'images/life_front.png';
@@ -52,6 +74,16 @@ class Constants {
   static const professionalMoveImagePath = 'images/professional_move.png';
   static const professionalMobileImagePath = 'images/professional_mobile.png';
 
+  // Professional page images related constants
+  static const professionalAwardsImagePath =
+      'images/professional/awards_logo.png';
+  static const professionalEducationImagePath =
+      'images/professional/education_symbol.png';
+  static const professionalExperienceImagePath =
+      'images/professional/experience_logo.png';
+  static const professionalPublicationsImagePath =
+      'images/professional/publications_icon.png';
+
   // Footer - Social Icons related constants
   static const facebookImagePath = 'images/social/facebook.png';
   static const facebookBlackImagePath = 'images/social/facebook_black.png';
@@ -74,7 +106,7 @@ class Constants {
   static const xLink = 'https://twitter.com/SivaRatnakar/';
 
   // cache images
-  static const cacheWebImagesPaths = [
+  static const cacheHomeWebImagesPaths = [
     // logo
     siteTitleAnmateImagePath,
     // life
@@ -109,7 +141,7 @@ class Constants {
     xBlackImagePath,
     xImagePath,
   ];
-  static const cacheMobileImagesPaths = [
+  static const cacheHomeMobileImagesPaths = [
     // logo
     siteTitleAnmateImagePath,
     // life
@@ -127,6 +159,12 @@ class Constants {
     linkedInBlackImagePath,
     scholarBlackImagePath,
     xBlackImagePath,
+  ];
+  static const cacheProfessionalImagePaths = [
+    professionalAwardsImagePath,
+    professionalEducationImagePath,
+    professionalExperienceImagePath,
+    professionalPublicationsImagePath,
   ];
 
   // ! - DON'T TOUCH

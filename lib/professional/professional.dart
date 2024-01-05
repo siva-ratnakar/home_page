@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -9,8 +11,27 @@ import 'package:siva_website/utils/router.dart';
 part 'src/body.dart';
 part 'src/header.dart';
 
-class ProfessionalPage extends StatelessWidget {
+class ProfessionalPage extends StatefulWidget {
   const ProfessionalPage({super.key});
+
+  @override
+  State<ProfessionalPage> createState() => _ProfessionalPageState();
+}
+
+class _ProfessionalPageState extends State<ProfessionalPage> {
+  precacheImages() {
+    const imagePaths = Constants.cacheProfessionalImagePaths;
+    for (var image in imagePaths) {
+      precacheImage(Image.asset(image).image, context);
+    }
+  }
+
+  @override
+  void didChangeDependencies() {
+    // pre cache all images needed
+    precacheImages();
+    super.didChangeDependencies();
+  }
 
   @override
   Widget build(BuildContext context) {
