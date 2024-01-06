@@ -68644,7 +68644,9 @@ s.toString
 o=B.b.gbr(o).Q
 o.toString
 r=p.a=B.c.fU(s/o*4)
-if(r===0)r=1
+if(r<1)r=1
+p.a=r
+if(r>4)r=4
 p.a=r
 o=q.e
 o===$&&A.b()
