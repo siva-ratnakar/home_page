@@ -28,10 +28,6 @@ class Constants {
   static const List<ProfessionalItem> professionalItems = [
     // TODO(immadisairaj): add items also for carousel
     ProfessionalItem(
-      title: 'Awards',
-      iconImagePath: professionalAwardsImagePath,
-    ),
-    ProfessionalItem(
       title: 'Education',
       iconImagePath: professionalEducationImagePath,
     ),
@@ -42,6 +38,10 @@ class Constants {
     ProfessionalItem(
       title: 'Publications',
       iconImagePath: professionalPublicationsImagePath,
+    ),
+    ProfessionalItem(
+      title: 'Awards',
+      iconImagePath: professionalAwardsImagePath,
     ),
   ];
 

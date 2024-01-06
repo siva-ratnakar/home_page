@@ -10,9 +10,13 @@ class ProfessionalBody extends StatelessWidget {
     final screenHeight = MediaQuery.sizeOf(context).height;
     final screenWidth = MediaQuery.sizeOf(context).width;
     final backImageSize = min(screenHeight, screenWidth) * 0.2;
-    return Scrollbar(
+    return RawScrollbar(
       controller: ProfessionalScreenHelper().scrollController,
       thumbVisibility: true,
+      trackVisibility: true,
+      radius: const Radius.circular(20),
+      thickness: 10,
+      thumbColor: Colors.black,
       child: ListWheelScrollView.useDelegate(
         physics: const FixedExtentScrollPhysics(),
         controller: ProfessionalScreenHelper().scrollController,

@@ -25,32 +25,43 @@ class ProfessionalHeader extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  TitleIconButtonWrapper(
-                    child: IconButton(
-                      onPressed: () => context.go(NavigationRoutes.home.path),
-                      padding: _iconButtonPadding,
-                      icon: const Icon(Icons.home_outlined),
-                      color: _foregroundColor,
-                      iconSize: _iconSize,
-                      tooltip: 'Go Home!',
+                  Flexible(
+                    flex: 0,
+                    fit: FlexFit.loose,
+                    child: TitleIconButtonWrapper(
+                      child: IconButton(
+                        onPressed: () => context.go(NavigationRoutes.home.path),
+                        padding: _iconButtonPadding,
+                        icon: const Icon(Icons.home_outlined),
+                        color: _foregroundColor,
+                        iconSize: _iconSize,
+                        tooltip: 'Go Home!',
+                      ),
                     ),
                   ),
                   Flexible(
                     flex: 1,
                     child: ProfessionalHeaderTitle(
-                        foregroundColor: _foregroundColor),
-                  ),
-                  TitleIconButtonWrapper(
-                    child: IconButton(
-                      onPressed: () {
-                        LinksHelper.openInNewTab(
-                            'https://sivaratnakar.com/${Constants.resumePathName}');
-                      },
-                      padding: _iconButtonPadding,
-                      icon: const Icon(CupertinoIcons.doc_text),
+                      foregroundColor: _foregroundColor,
+                      iconButtonPadding: _iconButtonPadding,
                       iconSize: _iconSize,
-                      color: _foregroundColor,
-                      tooltip: 'View CV/Resumé',
+                    ),
+                  ),
+                  Flexible(
+                    flex: 0,
+                    fit: FlexFit.loose,
+                    child: TitleIconButtonWrapper(
+                      child: IconButton(
+                        onPressed: () {
+                          LinksHelper.openInNewTab(
+                              'https://sivaratnakar.com/${Constants.resumePathName}');
+                        },
+                        padding: _iconButtonPadding,
+                        icon: const Icon(CupertinoIcons.doc_text),
+                        iconSize: _iconSize,
+                        color: _foregroundColor,
+                        tooltip: 'View CV/Resumé',
+                      ),
                     ),
                   ),
                 ],
@@ -65,12 +76,18 @@ class ProfessionalHeader extends StatelessWidget {
 }
 
 class ProfessionalHeaderTitle extends StatefulWidget {
-  const ProfessionalHeaderTitle({
-    super.key,
-    required Color foregroundColor,
-  }) : _foregroundColor = foregroundColor;
+  const ProfessionalHeaderTitle(
+      {super.key,
+      required Color foregroundColor,
+      required EdgeInsets iconButtonPadding,
+      required double iconSize})
+      : _foregroundColor = foregroundColor,
+        _iconButtonPadding = iconButtonPadding,
+        _iconSize = iconSize;
 
   final Color _foregroundColor;
+  final EdgeInsets _iconButtonPadding;
+  final double _iconSize;
 
   @override
   State<ProfessionalHeaderTitle> createState() =>
@@ -79,6 +96,8 @@ class ProfessionalHeaderTitle extends StatefulWidget {
 
 class _ProfessionalHeaderTitleState extends State<ProfessionalHeaderTitle> {
   final _scrollController = ProfessionalScreenHelper().scrollController;
+  final showArrows = !PlatformHelper.isWebMobile;
+  final sections = Constants.professionalItems.length;
 
   late int _currentSection;
   @override
@@ -96,11 +115,9 @@ class _ProfessionalHeaderTitleState extends State<ProfessionalHeaderTitle> {
   }
 
   listener() {
-    // TODO(immadisairaj): This is just to test for now, implement it completely
     if (_scrollController.hasClients) {
       final currentOffset = _scrollController.offset;
       final maxOffset = _scrollController.position.maxScrollExtent;
-      final sections = Constants.professionalItems.length;
 
       var currentSection = (currentOffset / maxOffset * sections).ceil();
       currentSection = currentSection < 1 ? 1 : currentSection;
@@ -111,10 +128,87 @@ class _ProfessionalHeaderTitleState extends State<ProfessionalHeaderTitle> {
           _currentSection = currentSection;
         });
       }
-
-      // print(currentSection);
     }
   }
+
+  goToSection(int goTo) {
+    if (_currentSection == 1 && goTo < _currentSection) return;
+    if (_currentSection == sections && goTo > _currentSection) return;
+
+    if (_scrollController.hasClients) {
+      final maxOffset = _scrollController.position.maxScrollExtent;
+      final goToOffset = maxOffset / (sections - 1) * (goTo - 1);
+
+      _scrollController.animateTo(
+        goToOffset,
+        duration: Constants.defaultDuration,
+        curve: Curves.easeInOut,
+      );
+    }
+  }
+
+  goPrevious() => goToSection(_currentSection - 1);
+
+  goNext() => goToSection(_currentSection + 1);
+
+  @override
+  Widget build(BuildContext context) {
+    var professionalHeaderJustTitle = ProfessionalHeaderJustTitle(
+      widget: widget,
+      currentSection: _currentSection,
+    );
+    final hideLeft = _currentSection == 1;
+    final hideRight = _currentSection == sections;
+    return showArrows
+        ? Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              AnimatedOpacity(
+                opacity: hideLeft ? 0 : 1,
+                duration: Constants.defaultDuration,
+                child: TitleIconButtonWrapper(
+                  child: IconButton(
+                    onPressed: hideLeft ? null : goPrevious,
+                    padding: widget._iconButtonPadding,
+                    icon: const Icon(Icons.keyboard_double_arrow_left_sharp),
+                    iconSize: widget._iconSize,
+                    color: widget._foregroundColor,
+                    tooltip: hideLeft ? null : 'Previous Section',
+                  ),
+                ),
+              ),
+              professionalHeaderJustTitle,
+              AnimatedOpacity(
+                opacity: hideRight ? 0 : 1,
+                duration: Constants.defaultDuration,
+                child: TitleIconButtonWrapper(
+                  child: IconButton(
+                    onPressed: hideRight ? null : goNext,
+                    padding: widget._iconButtonPadding,
+                    icon: const Icon(Icons.keyboard_double_arrow_right_sharp),
+                    iconSize: widget._iconSize,
+                    color: widget._foregroundColor,
+                    tooltip: hideRight ? null : 'Next Section',
+                  ),
+                ),
+              ),
+            ],
+          )
+        : professionalHeaderJustTitle;
+  }
+}
+
+class ProfessionalHeaderJustTitle extends StatelessWidget {
+  const ProfessionalHeaderJustTitle({
+    super.key,
+    required this.widget,
+    required int currentSection,
+  }) : _currentSection = currentSection;
+
+  final ProfessionalHeaderTitle widget;
+  final int _currentSection;
 
   @override
   Widget build(BuildContext context) {
@@ -157,15 +251,11 @@ class TitleIconButtonWrapper extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Flexible(
-      flex: 0,
-      fit: FlexFit.loose,
-      child: FittedBox(
-        child: SizedBox(
-          height: 60,
-          width: 60,
-          child: child,
-        ),
+    return FittedBox(
+      child: SizedBox(
+        height: 60,
+        width: 60,
+        child: child,
       ),
     );
   }
