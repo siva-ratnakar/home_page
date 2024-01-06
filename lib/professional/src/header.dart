@@ -80,12 +80,12 @@ class ProfessionalHeaderTitle extends StatefulWidget {
 class _ProfessionalHeaderTitleState extends State<ProfessionalHeaderTitle> {
   final _scrollController = ProfessionalScreenHelper().scrollController;
 
-  late int currentSection;
+  late int _currentSection;
   @override
   void initState() {
     super.initState();
 
-    currentSection = 1;
+    _currentSection = 1;
     _scrollController.addListener(listener);
   }
 
@@ -102,12 +102,13 @@ class _ProfessionalHeaderTitleState extends State<ProfessionalHeaderTitle> {
       final maxOffset = _scrollController.position.maxScrollExtent;
       final sections = Constants.professionalItems.length;
 
-      var _currentSection = (currentOffset / maxOffset * sections).ceil();
-      _currentSection = _currentSection == 0 ? 1 : _currentSection;
+      var currentSection = (currentOffset / maxOffset * sections).ceil();
+      currentSection = currentSection < 1 ? 1 : currentSection;
+      currentSection = currentSection > sections ? sections : currentSection;
 
-      if (_currentSection != currentSection) {
+      if (currentSection != _currentSection) {
         setState(() {
-          currentSection = _currentSection;
+          _currentSection = currentSection;
         });
       }
 
@@ -134,8 +135,8 @@ class _ProfessionalHeaderTitleState extends State<ProfessionalHeaderTitle> {
               // TODO(immadisairaj): Try to add animations if possible
               child: AnimatedContainer(
                 duration: Constants.defaultDuration,
-                child:
-                    Text(Constants.professionalItems[currentSection - 1].title),
+                child: Text(
+                    Constants.professionalItems[_currentSection - 1].title),
               ),
               // child: const Text('Professional'),
             ),
