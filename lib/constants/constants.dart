@@ -42,6 +42,12 @@ class Constants {
     ProfessionalItem(
       title: 'Awards',
       iconImagePath: professionalAwardsImagePath,
+      itemsList: [
+        CarouselItem(
+          title: 'CSIR-NET Junior Research Fellowship',
+          time: '2022',
+        )
+      ],
     ),
   ];
 
