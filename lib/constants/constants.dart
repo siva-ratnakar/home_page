@@ -38,6 +38,7 @@ class Constants {
     ProfessionalItem(
       title: 'Publications',
       iconImagePath: professionalPublicationsImagePath,
+      itemsList: [],
     ),
     ProfessionalItem(
       title: 'Awards',
@@ -46,7 +47,15 @@ class Constants {
         CarouselItem(
           title: 'CSIR-NET Junior Research Fellowship',
           time: '2022',
-        )
+        ),
+        CarouselItem(
+          title: 'CSIR-NET Junior Research Fellowship',
+          time: '2022',
+        ),
+        CarouselItem(
+          title: 'CSIR-NET Junior Research Fellowship',
+          time: '2022',
+        ),
       ],
     ),
   ];

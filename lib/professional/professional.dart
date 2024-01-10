@@ -1,10 +1,12 @@
 import 'dart:math';
 
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:siva_website/constants/constants.dart';
 import 'package:siva_website/main.dart';
+import 'package:siva_website/professional/src/classes.dart';
 import 'package:siva_website/utils/helper.dart';
 import 'package:siva_website/utils/router.dart';
 
@@ -71,7 +73,7 @@ class UnderConstruction extends StatelessWidget {
         ),
         Center(
           child: Text(
-            'Please wait while we are building for you!',
+            'Please wait while we get data for you!',
             style: TextStyle(
               color: textColor,
               fontSize: 16,

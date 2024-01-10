@@ -37,10 +37,13 @@ class ProfessionalBody extends StatelessWidget {
                         vertical: screenHeight * 0.12,
                       ),
                       // TODO(immadisairaj): add the carousels
-                      child: const UnderConstruction(
-                        color: Colors.black12,
-                        textColor: Colors.black,
-                      ),
+                      child: proffItems[index].itemsList == null ||
+                              proffItems[index].itemsList!.isEmpty
+                          ? const UnderConstruction(
+                              color: Colors.black12,
+                              textColor: Colors.black,
+                            )
+                          : CarouselBody(items: proffItems[index].itemsList!),
                     ),
                   ),
                   Align(
@@ -63,6 +66,31 @@ class ProfessionalBody extends StatelessWidget {
               ),
             );
           },
+        ),
+      ),
+    );
+  }
+}
+
+class CarouselBody extends StatelessWidget {
+  const CarouselBody({super.key, required this.items});
+
+  final List<CarouselItem> items;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Colors.blue,
+      child: CarouselSlider.builder(
+        itemCount: items.length,
+        itemBuilder: (context, index, realIndex) => const Placeholder(),
+        options: CarouselOptions(
+          // height: MediaQuery.sizeOf(context).height * 0.6,
+          scrollDirection: Axis.horizontal,
+          autoPlay: false,
+          enableInfiniteScroll: false,
+          pauseAutoPlayOnTouch: true,
+          disableCenter: true,
         ),
       ),
     );
