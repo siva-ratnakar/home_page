@@ -20,7 +20,8 @@ class ProfessionalBody extends StatelessWidget {
       child: ListWheelScrollView.useDelegate(
         physics: const FixedExtentScrollPhysics(),
         controller: ProfessionalScreenHelper().scrollController,
-        useMagnifier: true,
+        // TODO(immadisairaj): Fix when magnifier is true or find another soln.
+        useMagnifier: false,
         magnification: 1.25,
         itemExtent: screenHeight * 0.8,
         childDelegate: ListWheelChildBuilderDelegate(
@@ -36,7 +37,6 @@ class ProfessionalBody extends StatelessWidget {
                         horizontal: screenWidth * 0.12,
                         vertical: screenHeight * 0.12,
                       ),
-                      // TODO(immadisairaj): add the carousels
                       child: proffItems[index].itemsList == null ||
                               proffItems[index].itemsList!.isEmpty
                           ? const UnderConstruction(
@@ -79,19 +79,25 @@ class CarouselBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.blue,
-      child: CarouselSlider.builder(
-        itemCount: items.length,
-        itemBuilder: (context, index, realIndex) => const Placeholder(),
-        options: CarouselOptions(
-          // height: MediaQuery.sizeOf(context).height * 0.6,
-          scrollDirection: Axis.horizontal,
-          autoPlay: false,
-          enableInfiniteScroll: false,
-          pauseAutoPlayOnTouch: true,
-          disableCenter: true,
+    return CarouselSlider.builder(
+      itemCount: items.length,
+      itemBuilder: (context, index, realIndex) => Container(
+        decoration: BoxDecoration(
+          border: Border.all(),
+          borderRadius: const BorderRadius.all(Radius.circular(30)),
         ),
+        // TODO(immadisairaj): finish this widget
+        child: Center(
+          child: Text(items[index].title),
+        ),
+      ),
+      options: CarouselOptions(
+        scrollDirection: Axis.horizontal,
+        autoPlay: true,
+        enableInfiniteScroll: false,
+        pauseAutoPlayOnTouch: true,
+        disableCenter: true,
+        enlargeCenterPage: true,
       ),
     );
   }

@@ -49,11 +49,7 @@ class Constants {
           time: '2022',
         ),
         CarouselItem(
-          title: 'CSIR-NET Junior Research Fellowship',
-          time: '2022',
-        ),
-        CarouselItem(
-          title: 'CSIR-NET Junior Research Fellowship',
+          title: 'Gold Medal',
           time: '2022',
         ),
       ],
