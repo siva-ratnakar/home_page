@@ -21,14 +21,16 @@ class ProfessionalBody extends StatelessWidget {
         physics: const FixedExtentScrollPhysics(),
         controller: ProfessionalScreenHelper().scrollController,
         // TODO(immadisairaj): Fix when magnifier is true or find another soln.
-        useMagnifier: false,
-        magnification: 1.25,
-        itemExtent: screenHeight * 0.8,
+        // useMagnifier: true,
+        magnification: 1,
+        squeeze: 0.9,
+        itemExtent: screenHeight * 0.9,
         childDelegate: ListWheelChildBuilderDelegate(
           childCount: proffItems.length,
           builder: (context, index) {
             return SizedBox(
-              width: screenWidth * 0.8,
+              key: ValueKey(index),
+              width: screenWidth * 0.9,
               child: Stack(
                 children: [
                   Positioned.fill(
