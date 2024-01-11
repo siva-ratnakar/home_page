@@ -17,58 +17,51 @@ class ProfessionalBody extends StatelessWidget {
       radius: const Radius.circular(20),
       thickness: 10,
       thumbColor: Colors.black,
-      child: ListWheelScrollView.useDelegate(
-        physics: const FixedExtentScrollPhysics(),
+      child: PageView.builder(
+        scrollDirection: Axis.vertical,
         controller: ProfessionalScreenHelper().scrollController,
-        // TODO(immadisairaj): Fix when magnifier is true or find another soln.
-        // useMagnifier: true,
-        magnification: 1,
-        squeeze: 0.9,
-        itemExtent: screenHeight * 0.9,
-        childDelegate: ListWheelChildBuilderDelegate(
-          childCount: proffItems.length,
-          builder: (context, index) {
-            return SizedBox(
-              key: ValueKey(index),
-              width: screenWidth * 0.9,
-              child: Stack(
-                children: [
-                  Positioned.fill(
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: screenWidth * 0.12,
-                        vertical: screenHeight * 0.12,
-                      ),
-                      child: proffItems[index].itemsList == null ||
-                              proffItems[index].itemsList!.isEmpty
-                          ? const UnderConstruction(
-                              color: Colors.black12,
-                              textColor: Colors.black,
-                            )
-                          : CarouselBody(items: proffItems[index].itemsList!),
+        itemCount: proffItems.length,
+        itemBuilder: (context, index) {
+          return Padding(
+            key: ValueKey(index),
+            padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.03),
+            child: Stack(
+              children: [
+                Positioned.fill(
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: screenWidth * 0.12,
+                      vertical: screenHeight * 0.12,
                     ),
+                    child: proffItems[index].itemsList == null ||
+                            proffItems[index].itemsList!.isEmpty
+                        ? const UnderConstruction(
+                            color: Colors.black12,
+                            textColor: Colors.black,
+                          )
+                        : CarouselBody(items: proffItems[index].itemsList!),
                   ),
-                  Align(
-                    alignment: Alignment.topLeft,
-                    child: Padding(
-                      padding: EdgeInsets.only(
-                        top: screenHeight * 0.05,
-                        left: 8,
-                      ),
-                      child: SizedBox(
-                        width: backImageSize,
-                        height: backImageSize,
-                        child: Image.asset(
-                          proffItems[index].iconImagePath,
-                        ),
+                ),
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: Padding(
+                    padding: EdgeInsets.only(
+                      top: screenHeight * 0.05,
+                      left: 8,
+                    ),
+                    child: SizedBox(
+                      width: backImageSize,
+                      height: backImageSize,
+                      child: Image.asset(
+                        proffItems[index].iconImagePath,
                       ),
                     ),
                   ),
-                ],
-              ),
-            );
-          },
-        ),
+                ),
+              ],
+            ),
+          );
+        },
       ),
     );
   }

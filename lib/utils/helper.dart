@@ -29,5 +29,5 @@ class ProfessionalScreenHelper {
 
   ProfessionalScreenHelper._internal();
 
-  final scrollController = FixedExtentScrollController();
+  final scrollController = PageController(viewportFraction: 0.95);
 }
