@@ -48,7 +48,7 @@ class _HomePageState extends State<HomePage> {
         height: MediaQuery.sizeOf(context).height,
         width: MediaQuery.sizeOf(context).width,
         child: const Column(
-          mainAxisSize: MainAxisSize.min,
+          mainAxisSize: MainAxisSize.max,
           children: [
             HomeHeader(),
             Expanded(child: HomeBody()),

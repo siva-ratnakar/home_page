@@ -2,7 +2,6 @@ import 'dart:math';
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:siva_website/constants/constants.dart';
@@ -44,7 +43,7 @@ class _ProfessionalPageState extends State<ProfessionalPage> {
         height: MediaQuery.sizeOf(context).height,
         width: MediaQuery.sizeOf(context).width,
         child: const Column(
-          mainAxisSize: MainAxisSize.min,
+          mainAxisSize: MainAxisSize.max,
           children: [
             ProfessionalHeader(),
             Expanded(child: ProfessionalBody()),

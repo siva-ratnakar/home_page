@@ -24,6 +24,7 @@ class Constants {
   // Professional page related constants
   static const String siteProfessionalTitleFontFamily = 'RubikDoodleShadow';
   static const String resumePathName = 'cv.pdf';
+  static const Duration carouselIntervalDuration = Duration(seconds: 5);
   // ! This should have at least one item
   static const List<ProfessionalItem> professionalItems = [
     // TODO(immadisairaj): add items also for carousel

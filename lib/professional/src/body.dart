@@ -39,7 +39,7 @@ class ProfessionalBody extends StatelessWidget {
                             color: Colors.black12,
                             textColor: Colors.black,
                           )
-                        : CarouselBody(items: proffItems[index].itemsList!),
+                        : _getCarousel(index),
                   ),
                 ),
                 Align(
@@ -65,34 +65,112 @@ class ProfessionalBody extends StatelessWidget {
       ),
     );
   }
+
+  Widget _getCarousel(int index) {
+    if (PlatformHelper.isWebMobile) {
+      return CarouselBody(items: proffItems[index].itemsList!);
+    }
+    final carouselController = CarouselController();
+    return CarouselBodyWrapper(
+      body: CarouselBody(
+        items: proffItems[index].itemsList!,
+        carouselController: carouselController,
+      ),
+      carouselController: carouselController,
+    );
+  }
 }
 
-class CarouselBody extends StatelessWidget {
-  const CarouselBody({super.key, required this.items});
+class CarouselBodyWrapper extends StatelessWidget {
+  const CarouselBodyWrapper({
+    super.key,
+    required this.body,
+    this.carouselController,
+  });
 
-  final List<CarouselItem> items;
+  final CarouselBody body;
+  final CarouselController? carouselController;
 
   @override
   Widget build(BuildContext context) {
-    return CarouselSlider.builder(
-      itemCount: items.length,
-      itemBuilder: (context, index, realIndex) => Container(
-        decoration: BoxDecoration(
-          border: Border.all(),
-          borderRadius: const BorderRadius.all(Radius.circular(30)),
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisSize: MainAxisSize.max,
+      // TODO(immadisairaj): adjust icon button sizes
+      children: [
+        IconButton(
+          onPressed: () {
+            if (carouselController != null && carouselController!.ready) {
+              carouselController!.previousPage();
+            }
+          },
+          icon: const Icon(Icons.arrow_back_ios_new_sharp),
         ),
-        // TODO(immadisairaj): finish this widget
-        child: Center(
-          child: Text(items[index].title),
+        Expanded(child: body),
+        IconButton(
+          onPressed: () {
+            if (carouselController != null && carouselController!.ready) {
+              carouselController!.nextPage();
+            }
+          },
+          icon: const Icon(Icons.arrow_forward_ios_sharp),
         ),
-      ),
-      options: CarouselOptions(
-        scrollDirection: Axis.horizontal,
-        autoPlay: true,
-        enableInfiniteScroll: false,
-        pauseAutoPlayOnTouch: true,
-        disableCenter: true,
-        enlargeCenterPage: true,
+      ],
+    );
+  }
+}
+
+class CarouselBody extends StatelessWidget {
+  const CarouselBody({
+    super.key,
+    required this.items,
+    this.carouselController,
+  });
+
+  final List<CarouselItem> items;
+  final CarouselController? carouselController;
+
+  @override
+  Widget build(BuildContext context) {
+    return ShaderMask(
+      shaderCallback: (rect) => LinearGradient(
+        begin: Alignment.centerLeft,
+        end: Alignment.centerRight,
+        stops: const [0.0, 0.15, 0.85, 1.0],
+        colors: [
+          Theme.of(context).colorScheme.background,
+          Colors.transparent,
+          Colors.transparent,
+          Theme.of(context).colorScheme.background,
+        ],
+      ).createShader(rect),
+      blendMode: BlendMode.dstOut,
+      child: CarouselSlider.builder(
+        carouselController: carouselController,
+        itemCount: items.length,
+        itemBuilder: (context, index, realIndex) => Container(
+          decoration: BoxDecoration(
+            border: Border.all(),
+            borderRadius: const BorderRadius.all(Radius.circular(30)),
+          ),
+          // TODO(immadisairaj): finish this widget
+          // TODO(immadisairaj): also handle links
+          child: Center(
+            child: Text(items[index].title),
+          ),
+        ),
+        options: CarouselOptions(
+          scrollDirection: Axis.horizontal,
+          disableCenter: true,
+          enableInfiniteScroll: false,
+          pauseAutoPlayOnTouch: true,
+          autoPlay: true,
+          autoPlayCurve: Curves.easeInOut,
+          autoPlayInterval: Constants.carouselIntervalDuration,
+          enlargeCenterPage: true,
+          enlargeFactor: 0.3,
+          viewportFraction: 0.6,
+        ),
       ),
     );
   }
