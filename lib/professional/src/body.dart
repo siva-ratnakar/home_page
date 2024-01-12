@@ -155,8 +155,15 @@ class CarouselBody extends StatelessWidget {
           ),
           // TODO(immadisairaj): finish this widget
           // TODO(immadisairaj): also handle links
-          child: Center(
-            child: Text(items[index].title),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(items[index].title),
+              if (items[index].description != null)
+                Text(items[index].description!),
+              Text(items[index].time),
+            ],
           ),
         ),
         options: CarouselOptions(

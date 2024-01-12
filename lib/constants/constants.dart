@@ -31,6 +31,18 @@ class Constants {
     ProfessionalItem(
       title: 'Education',
       iconImagePath: professionalEducationImagePath,
+      itemsList: [
+        CarouselItem(
+          title: 'Ph.D.',
+          description: 'Friedrich Miescher Institute',
+          time: '2023 - Present',
+        ),
+        CarouselItem(
+          title: 'Masters',
+          description: 'Sri Sathya Sai Institute of Higher Learning',
+          time: '2020 - 2022',
+        ),
+      ],
     ),
     ProfessionalItem(
       title: 'Experience',
