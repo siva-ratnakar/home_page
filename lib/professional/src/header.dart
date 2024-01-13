@@ -179,7 +179,10 @@ class _ProfessionalHeaderTitleState extends State<ProfessionalHeaderTitle> {
                   ),
                 ),
               ),
-              professionalHeaderJustTitle,
+              Flexible(
+                fit: FlexFit.loose,
+                child: professionalHeaderJustTitle,
+              ),
               AnimatedOpacity(
                 opacity: hideRight ? 0 : 1,
                 duration: Constants.defaultDuration,
@@ -232,7 +235,6 @@ class ProfessionalHeaderJustTitle extends StatelessWidget {
                 child: Text(
                     Constants.professionalItems[_currentSection - 1].title),
               ),
-              // child: const Text('Professional'),
             ),
           ),
         ),

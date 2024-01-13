@@ -159,10 +159,10 @@ class CarouselBody extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text(items[index].title),
+              Text(items[index].title).center,
               if (items[index].description != null)
-                Text(items[index].description!),
-              Text(items[index].time),
+                Text(items[index].description!).center,
+              Text(items[index].time).center,
             ],
           ),
         ),
