@@ -152,24 +152,28 @@ class CarouselBody extends StatelessWidget {
           onTap: items[index].link == null
               ? null
               : () {
-                  // TODO(immadisairaj): Test the link handler and pointer
                   LinksHelper.openInNewTab(items[index].link!);
                 },
-          child: Container(
-            decoration: BoxDecoration(
-              border: Border.all(),
-              borderRadius: const BorderRadius.all(Radius.circular(30)),
-            ),
-            // TODO(immadisairaj): finish this widget
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text(items[index].title).center,
-                if (items[index].description != null)
-                  Text(items[index].description!).center,
-                Text(items[index].time).center,
-              ],
+          child: MouseRegion(
+            cursor: items[index].link == null
+                ? MouseCursor.defer
+                : SystemMouseCursors.click,
+            child: Container(
+              decoration: BoxDecoration(
+                border: Border.all(),
+                borderRadius: const BorderRadius.all(Radius.circular(30)),
+              ),
+              // TODO(immadisairaj): finish this widget
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(items[index].title).center,
+                  if (items[index].description != null)
+                    Text(items[index].description!).center,
+                  Text(items[index].time).center,
+                ],
+              ),
             ),
           ),
         ),
