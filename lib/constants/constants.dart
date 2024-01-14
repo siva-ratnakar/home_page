@@ -47,11 +47,26 @@ class Constants {
     ProfessionalItem(
       title: 'Experience',
       iconImagePath: professionalExperienceImagePath,
+      itemsList: [
+        CarouselItem(
+          title: 'Dummy Title',
+          description: 'Dummy Description',
+          time: 'Time Period',
+          flipText: 'Dummy Flip Text',
+        ),
+      ],
     ),
     ProfessionalItem(
       title: 'Publications',
       iconImagePath: professionalPublicationsImagePath,
-      itemsList: [],
+      itemsList: [
+        CarouselItem(
+          title: 'Dummy Title',
+          description: 'Dummy Description',
+          time: 'Time Period',
+          link: 'https://sivaratnakar.com',
+        ),
+      ],
     ),
     ProfessionalItem(
       title: 'Awards',
