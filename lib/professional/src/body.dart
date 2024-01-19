@@ -148,35 +148,58 @@ class CarouselBody extends StatelessWidget {
       child: CarouselSlider.builder(
         carouselController: carouselController,
         itemCount: items.length,
-        itemBuilder: (context, index, realIndex) => GestureDetector(
-          onTap: items[index].link == null
-              ? null
-              : () {
-                  LinksHelper.openInNewTab(items[index].link!);
-                },
-          child: MouseRegion(
-            cursor: items[index].link == null
-                ? MouseCursor.defer
-                : SystemMouseCursors.click,
-            child: Container(
-              decoration: BoxDecoration(
-                border: Border.all(),
-                borderRadius: const BorderRadius.all(Radius.circular(30)),
-              ),
-              // TODO(immadisairaj): finish this widget
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Text(items[index].title).center,
-                  if (items[index].description != null)
-                    Text(items[index].description!).center,
-                  Text(items[index].time).center,
-                ],
+        itemBuilder: (context, index, realIndex) {
+          final isFlippable = items[index].flipText != null;
+          final isClickable = items[index].link != null || isFlippable;
+          return GestureDetector(
+            onTap: isClickable
+                ? () {
+                    // Priority click is for flippable
+                    if (isFlippable) {
+                      // TODO(immadisairaj): make it flippable
+                    } else {
+                      LinksHelper.openInNewTab(items[index].link!);
+                    }
+                  }
+                : null,
+            child: MouseRegion(
+              cursor:
+                  isClickable ? SystemMouseCursors.click : MouseCursor.defer,
+              child: Container(
+                decoration: BoxDecoration(
+                  border: Border.all(),
+                  borderRadius: const BorderRadius.all(Radius.circular(30)),
+                ),
+                // TODO(immadisairaj): finish this widget
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                      items[index].title,
+                      style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                            fontWeight: FontWeight.bold,
+                          ),
+                    ).center,
+                    if (items[index].description != null)
+                      Text(
+                        items[index].description!,
+                        style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                              // TODO(immadisairaj): check the overflow
+                              // situation with more text
+                              overflow: TextOverflow.visible,
+                            ),
+                      ).center,
+                    Text(
+                      items[index].time,
+                      style: Theme.of(context).textTheme.labelLarge!.copyWith(),
+                    ).center,
+                  ],
+                ),
               ),
             ),
-          ),
-        ),
+          );
+        },
         options: CarouselOptions(
           scrollDirection: Axis.horizontal,
           disableCenter: true,
