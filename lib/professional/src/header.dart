@@ -96,6 +96,7 @@ class ProfessionalHeaderTitle extends StatefulWidget {
 
 class _ProfessionalHeaderTitleState extends State<ProfessionalHeaderTitle> {
   final _scrollController = ProfessionalScreenHelper().scrollController;
+  late final _titleController;
   final showArrows = !PlatformHelper.isWebMobile;
   final sections = Constants.professionalItems.length;
 
@@ -103,6 +104,8 @@ class _ProfessionalHeaderTitleState extends State<ProfessionalHeaderTitle> {
   @override
   void initState() {
     super.initState();
+
+    _titleController = PageController();
 
     _currentSection = 1;
     _scrollController.addListener(listener);
@@ -127,6 +130,8 @@ class _ProfessionalHeaderTitleState extends State<ProfessionalHeaderTitle> {
         setState(() {
           _currentSection = currentSection;
         });
+
+        titleGoToSection(_currentSection);
       }
     }
   }
@@ -147,6 +152,19 @@ class _ProfessionalHeaderTitleState extends State<ProfessionalHeaderTitle> {
     }
   }
 
+  titleGoToSection(int goTo) {
+    if (_titleController.hasClients) {
+      final maxOffset = _titleController.position.maxScrollExtent;
+      final goToOffset = maxOffset / (sections - 1) * (goTo - 1);
+
+      _titleController.animateTo(
+        goToOffset,
+        duration: Constants.defaultDuration,
+        curve: Curves.easeInOut,
+      );
+    }
+  }
+
   goPrevious() => goToSection(_currentSection - 1);
 
   goNext() => goToSection(_currentSection + 1);
@@ -155,7 +173,7 @@ class _ProfessionalHeaderTitleState extends State<ProfessionalHeaderTitle> {
   Widget build(BuildContext context) {
     var professionalHeaderJustTitle = ProfessionalHeaderJustTitle(
       widget: widget,
-      currentSection: _currentSection,
+      controller: _titleController,
     );
     final hideLeft = _currentSection == 1;
     final hideRight = _currentSection == sections;
@@ -207,11 +225,12 @@ class ProfessionalHeaderJustTitle extends StatelessWidget {
   const ProfessionalHeaderJustTitle({
     super.key,
     required this.widget,
-    required int currentSection,
-  }) : _currentSection = currentSection;
+    required this.controller,
+  });
 
   final ProfessionalHeaderTitle widget;
-  final int _currentSection;
+  final PageController controller;
+  // final int _currentSection;
 
   @override
   Widget build(BuildContext context) {
@@ -229,11 +248,14 @@ class ProfessionalHeaderJustTitle extends StatelessWidget {
                     letterSpacing: Constants.siteTitleLetterSpacing,
                     color: widget._foregroundColor,
                   ),
-              // TODO(immadisairaj): Try to add animations if possible
-              child: AnimatedContainer(
-                duration: Constants.defaultDuration,
-                child: Text(
-                    Constants.professionalItems[_currentSection - 1].title),
+              // using page view to do the swipe transition
+              child: PageView.builder(
+                scrollDirection: Axis.horizontal,
+                controller: controller,
+                itemCount: Constants.professionalItems.length,
+                itemBuilder: (context, index) => Center(
+                  child: Text(Constants.professionalItems[index].title),
+                ),
               ),
             ),
           ),
