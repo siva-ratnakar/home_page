@@ -96,7 +96,7 @@ class ProfessionalHeaderTitle extends StatefulWidget {
 
 class _ProfessionalHeaderTitleState extends State<ProfessionalHeaderTitle> {
   final _scrollController = ProfessionalScreenHelper().scrollController;
-  late final _titleController;
+  late final PageController _titleController;
   final showArrows = !PlatformHelper.isWebMobile;
   final sections = Constants.professionalItems.length;
 
@@ -230,7 +230,6 @@ class ProfessionalHeaderJustTitle extends StatelessWidget {
 
   final ProfessionalHeaderTitle widget;
   final PageController controller;
-  // final int _currentSection;
 
   @override
   Widget build(BuildContext context) {
@@ -251,6 +250,7 @@ class ProfessionalHeaderJustTitle extends StatelessWidget {
               // using page view to do the swipe transition
               child: PageView.builder(
                 scrollDirection: Axis.horizontal,
+                physics: const NeverScrollableScrollPhysics(),
                 controller: controller,
                 itemCount: Constants.professionalItems.length,
                 itemBuilder: (context, index) => Center(
