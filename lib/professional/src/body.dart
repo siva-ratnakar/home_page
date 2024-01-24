@@ -22,6 +22,9 @@ class ProfessionalBody extends StatelessWidget {
         controller: ProfessionalScreenHelper().scrollController,
         itemCount: proffItems.length,
         itemBuilder: (context, index) {
+          final offset = PlatformHelper.isWebMobile ? 0.08 : 0.12;
+          final horizontalSize = screenWidth * offset;
+          final verticalSize = screenHeight * offset;
           return Padding(
             key: ValueKey(index),
             padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.03),
@@ -30,8 +33,8 @@ class ProfessionalBody extends StatelessWidget {
                 Positioned.fill(
                   child: Padding(
                     padding: EdgeInsets.symmetric(
-                      horizontal: screenWidth * 0.12,
-                      vertical: screenHeight * 0.12,
+                      horizontal: horizontalSize,
+                      vertical: verticalSize,
                     ),
                     child: proffItems[index].itemsList == null ||
                             proffItems[index].itemsList!.isEmpty
@@ -96,24 +99,29 @@ class CarouselBodyWrapper extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       mainAxisSize: MainAxisSize.max,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
       // TODO(immadisairaj): adjust icon button sizes
       children: [
-        IconButton(
-          onPressed: () {
-            if (carouselController != null && carouselController!.ready) {
-              carouselController!.previousPage();
-            }
-          },
-          icon: const Icon(Icons.arrow_back_ios_new_sharp),
+        Center(
+          child: IconButton(
+            onPressed: () {
+              if (carouselController != null && carouselController!.ready) {
+                carouselController!.previousPage();
+              }
+            },
+            icon: const Icon(Icons.arrow_back_ios_new_sharp),
+          ),
         ),
         Expanded(child: body),
-        IconButton(
-          onPressed: () {
-            if (carouselController != null && carouselController!.ready) {
-              carouselController!.nextPage();
-            }
-          },
-          icon: const Icon(Icons.arrow_forward_ios_sharp),
+        Center(
+          child: IconButton(
+            onPressed: () {
+              if (carouselController != null && carouselController!.ready) {
+                carouselController!.nextPage();
+              }
+            },
+            icon: const Icon(Icons.arrow_forward_ios_sharp),
+          ),
         ),
       ],
     );
@@ -136,7 +144,7 @@ class CarouselBody extends StatelessWidget {
       shaderCallback: (rect) => LinearGradient(
         begin: Alignment.centerLeft,
         end: Alignment.centerRight,
-        stops: const [0.0, 0.15, 0.85, 1.0],
+        stops: const [0.0, 0.2, 0.8, 1.0],
         colors: [
           Theme.of(context).colorScheme.background,
           Colors.transparent,
