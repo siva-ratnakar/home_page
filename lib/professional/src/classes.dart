@@ -1,4 +1,3 @@
-// TODO(immadisairaj): update the classes to meet requirement
 class ProfessionalItem {
   const ProfessionalItem({
     required this.title,

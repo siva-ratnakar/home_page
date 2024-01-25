@@ -158,53 +158,43 @@ class CarouselBody extends StatelessWidget {
         itemCount: items.length,
         itemBuilder: (context, index, realIndex) {
           final isFlippable = items[index].flipText != null;
-          final isClickable = items[index].link != null || isFlippable;
+          final isClickable = items[index].link != null;
           return GestureDetector(
             onTap: isClickable
                 ? () {
-                    // Priority click is for flippable
-                    if (isFlippable) {
-                      // TODO(immadisairaj): make it flippable
-                    } else {
-                      LinksHelper.openInNewTab(items[index].link!);
-                    }
+                    // if the platform is on mobile and is flippable,
+                    // don't have clicks as the click flips the card
+                    if (isFlippable && PlatformHelper.isWebMobile) return;
+                    LinksHelper.openInNewTab(items[index].link!);
                   }
                 : null,
             child: MouseRegion(
               cursor:
                   isClickable ? SystemMouseCursors.click : MouseCursor.defer,
-              child: Container(
-                decoration: BoxDecoration(
-                  border: Border.all(),
-                  borderRadius: const BorderRadius.all(Radius.circular(30)),
-                ),
-                // TODO(immadisairaj): finish this widget
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text(
-                      items[index].title,
-                      style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                            fontWeight: FontWeight.bold,
-                          ),
-                    ).center,
-                    if (items[index].description != null)
-                      Text(
-                        items[index].description!,
-                        style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                              // TODO(immadisairaj): check the overflow
-                              // situation with more text
-                              overflow: TextOverflow.visible,
-                            ),
-                      ).center,
-                    Text(
-                      items[index].time,
-                      style: Theme.of(context).textTheme.labelLarge!.copyWith(),
-                    ).center,
-                  ],
-                ),
-              ),
+              // TODO(immadisairaj): finish the text style of this widget
+              child: isFlippable
+                  ? FlipAnimation(
+                      flipOnClickOnly: PlatformHelper.isWebMobile,
+                      front: CardContentWrapper(
+                        child: CardFront(item: items[index]),
+                      ),
+                      back: CardContentWrapper(
+                        child: Center(
+                          child: Text(
+                            items[index].flipText!,
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleLarge!
+                                .copyWith(
+                                  fontWeight: FontWeight.bold,
+                                ),
+                          ).center,
+                        ),
+                      ),
+                    )
+                  : CardContentWrapper(
+                      child: CardFront(item: items[index]),
+                    ),
             ),
           );
         },
@@ -221,6 +211,67 @@ class CarouselBody extends StatelessWidget {
           viewportFraction: 0.6,
         ),
       ),
+    );
+  }
+}
+
+class CardContentWrapper extends StatelessWidget {
+  const CardContentWrapper({
+    super.key,
+    required this.child,
+  });
+
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        border: Border.all(),
+        borderRadius: const BorderRadius.all(Radius.circular(30)),
+        color: Theme.of(context).colorScheme.background,
+      ),
+      height: double.maxFinite,
+      width: double.maxFinite,
+      child: child,
+    );
+  }
+}
+
+class CardFront extends StatelessWidget {
+  const CardFront({
+    super.key,
+    required this.item,
+  });
+
+  final CarouselItem item;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Text(
+          item.title,
+          style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                fontWeight: FontWeight.bold,
+              ),
+        ).center,
+        if (item.description != null)
+          Text(
+            item.description!,
+            style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                  // TODO(immadisairaj): check the overflow
+                  // situation with more text
+                  overflow: TextOverflow.visible,
+                ),
+          ).center,
+        Text(
+          item.time,
+          style: Theme.of(context).textTheme.labelLarge!.copyWith(),
+        ).center,
+      ],
     );
   }
 }

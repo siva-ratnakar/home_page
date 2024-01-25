@@ -27,7 +27,6 @@ class Constants {
   static const Duration carouselIntervalDuration = Duration(seconds: 5);
   // ! This should have at least one item
   static const List<ProfessionalItem> professionalItems = [
-    // TODO(immadisairaj): add items also for carousel
     ProfessionalItem(
       title: 'Education',
       iconImagePath: professionalEducationImagePath,
@@ -49,10 +48,11 @@ class Constants {
       iconImagePath: professionalExperienceImagePath,
       itemsList: [
         CarouselItem(
-          title: 'Dummy Title',
-          description: 'Dummy Description',
-          time: 'Time Period',
-          flipText: 'Dummy Flip Text',
+          title: 'Junior Research Fellow',
+          description: 'Indian Institute of Science',
+          time: 'Jun 2022 - Sep 2023',
+          flipText:
+              'Structural Inhibition studies on Mycobacterial Topoisomeases and DNA Gyrase',
         ),
       ],
     ),
