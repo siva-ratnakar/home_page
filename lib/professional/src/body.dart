@@ -71,12 +71,18 @@ class ProfessionalBody extends StatelessWidget {
 
   Widget _getCarousel(int index) {
     if (PlatformHelper.isWebMobile) {
-      return CarouselBody(items: proffItems[index].itemsList!);
+      return CarouselBody(
+        key: Key('CAROUSEL_BODY_$index'),
+        items: proffItems[index].itemsList!,
+        currentIndex: index,
+      );
     }
     final carouselController = CarouselController();
     return CarouselBodyWrapper(
       body: CarouselBody(
+        key: Key('CAROUSEL_BODY_$index'),
         items: proffItems[index].itemsList!,
+        currentIndex: index,
         carouselController: carouselController,
       ),
       carouselController: carouselController,
@@ -128,15 +134,61 @@ class CarouselBodyWrapper extends StatelessWidget {
   }
 }
 
-class CarouselBody extends StatelessWidget {
+class CarouselBody extends StatefulWidget {
   const CarouselBody({
     super.key,
     required this.items,
+    required this.currentIndex,
     this.carouselController,
   });
 
   final List<CarouselItem> items;
+  final int currentIndex;
   final CarouselController? carouselController;
+
+  @override
+  State<CarouselBody> createState() => _CarouselBodyState();
+}
+
+class _CarouselBodyState extends State<CarouselBody> {
+  final _scrollController = ProfessionalScreenHelper().scrollController;
+  final sections = Constants.professionalItems.length;
+
+  late bool _isVisible;
+
+  @override
+  void initState() {
+    super.initState();
+
+    // the first carousel is visible when initialized
+    _isVisible = widget.currentIndex == 0;
+    _scrollController.addListener(listener);
+  }
+
+  @override
+  dispose() {
+    _scrollController.removeListener(listener);
+    super.dispose();
+  }
+
+  listener() {
+    if (_scrollController.hasClients) {
+      final currentOffset = _scrollController.offset;
+      final maxOffset = _scrollController.position.maxScrollExtent;
+
+      var currentSection = (currentOffset / maxOffset * sections).ceil();
+      currentSection = currentSection < 1 ? 1 : currentSection;
+      currentSection = currentSection > sections ? sections : currentSection;
+
+      final isVisible = currentSection == widget.currentIndex + 1;
+
+      if (isVisible != _isVisible) {
+        setState(() {
+          _isVisible = isVisible;
+        });
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -154,62 +206,80 @@ class CarouselBody extends StatelessWidget {
       ).createShader(rect),
       blendMode: BlendMode.dstOut,
       child: CarouselSlider.builder(
-        carouselController: carouselController,
-        itemCount: items.length,
+        carouselController: widget.carouselController,
+        itemCount: widget.items.length,
         itemBuilder: (context, index, realIndex) {
-          final isFlippable = items[index].flipText != null;
-          final isClickable = items[index].link != null;
-          return GestureDetector(
-            onTap: isClickable
-                ? () {
-                    // if the platform is on mobile and is flippable,
-                    // don't have clicks as the click flips the card
-                    if (isFlippable && PlatformHelper.isWebMobile) return;
-                    LinksHelper.openInNewTab(items[index].link!);
-                  }
-                : null,
-            child: MouseRegion(
-              cursor:
-                  isClickable ? SystemMouseCursors.click : MouseCursor.defer,
-              // TODO(immadisairaj): finish the text style of this widget
-              child: isFlippable
-                  ? FlipAnimation(
-                      flipOnClickOnly: PlatformHelper.isWebMobile,
-                      front: CardContentWrapper(
-                        child: CardFront(item: items[index]),
-                      ),
-                      back: CardContentWrapper(
-                        child: Center(
-                          child: Text(
-                            items[index].flipText!,
-                            style: Theme.of(context)
-                                .textTheme
-                                .titleLarge!
-                                .copyWith(
-                                  fontWeight: FontWeight.bold,
-                                ),
-                          ).center,
-                        ),
-                      ),
-                    )
-                  : CardContentWrapper(
-                      child: CardFront(item: items[index]),
-                    ),
-            ),
+          return CarouselChild(
+            key: Key('CAROUSEL_CHILD_$index'),
+            items: widget.items,
+            index: index,
           );
         },
         options: CarouselOptions(
           scrollDirection: Axis.horizontal,
+          pageViewKey: PageStorageKey('PAGE_VIEW_${widget.currentIndex}'),
           disableCenter: true,
           enableInfiniteScroll: false,
           pauseAutoPlayOnTouch: true,
-          autoPlay: true,
+          pauseAutoPlayOnManualNavigate: true,
+          autoPlay: _isVisible,
           autoPlayCurve: Curves.easeInOut,
           autoPlayInterval: Constants.carouselIntervalDuration,
           enlargeCenterPage: true,
           enlargeFactor: 0.3,
           viewportFraction: 0.6,
         ),
+      ),
+    );
+  }
+}
+
+class CarouselChild extends StatelessWidget {
+  const CarouselChild({
+    super.key,
+    required this.items,
+    required this.index,
+  });
+
+  final List<CarouselItem> items;
+  final int index;
+
+  @override
+  Widget build(BuildContext context) {
+    final isFlippable = items[index].flipText != null;
+    final isClickable = items[index].link != null;
+    return GestureDetector(
+      onTap: isClickable
+          ? () {
+              // if the platform is on mobile and is flippable,
+              // don't have clicks as the click flips the card
+              if (isFlippable && PlatformHelper.isWebMobile) return;
+              LinksHelper.openInNewTab(items[index].link!);
+            }
+          : null,
+      child: MouseRegion(
+        cursor: isClickable ? SystemMouseCursors.click : MouseCursor.defer,
+        // TODO(immadisairaj): finish the text style of this widget
+        child: isFlippable
+            ? FlipAnimation(
+                flipOnClickOnly: PlatformHelper.isWebMobile,
+                front: CardContentWrapper(
+                  child: CardFront(item: items[index]),
+                ),
+                back: CardContentWrapper(
+                  child: Center(
+                    child: Text(
+                      items[index].flipText!,
+                      style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                            fontWeight: FontWeight.bold,
+                          ),
+                    ).center,
+                  ),
+                ),
+              )
+            : CardContentWrapper(
+                child: CardFront(item: items[index]),
+              ),
       ),
     );
   }
