@@ -22,7 +22,7 @@ class ProfessionalBody extends StatelessWidget {
         controller: ProfessionalScreenHelper().scrollController,
         itemCount: proffItems.length,
         itemBuilder: (context, index) {
-          final offset = PlatformHelper.isWebMobile ? 0.08 : 0.12;
+          const offset = 0.1;
           final horizontalSize = screenWidth * offset;
           final verticalSize = screenHeight * offset;
           return Padding(
@@ -225,16 +225,23 @@ class CardContentWrapper extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        border: Border.all(),
-        borderRadius: const BorderRadius.all(Radius.circular(30)),
-        color: Theme.of(context).colorScheme.background,
-      ),
-      height: double.maxFinite,
-      width: double.maxFinite,
-      child: child,
-    );
+    return LayoutBuilder(builder: (context, constraints) {
+      final cardHeight = constraints.maxHeight * 0.7;
+      final cardWidth = constraints.maxWidth * 0.9;
+      return Center(
+        child: Container(
+          decoration: BoxDecoration(
+            border: Border.all(),
+            borderRadius: const BorderRadius.all(Radius.circular(30)),
+            color: Theme.of(context).colorScheme.background,
+          ),
+          height: cardHeight,
+          width: cardWidth,
+          padding: const EdgeInsets.all(8),
+          child: child,
+        ),
+      );
+    });
   }
 }
 
