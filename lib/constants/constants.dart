@@ -41,6 +41,16 @@ class Constants {
           description: 'Sri Sathya Sai Institute of Higher Learning',
           time: '2020 - 2022',
         ),
+        CarouselItem(
+          title: 'Bachelors',
+          description: 'Sri Sathya Sai Institute of Higher Learning',
+          time: '2017 - 2020',
+        ),
+        CarouselItem(
+          title: 'High Schooling',
+          description: 'St. Andrews School',
+          time: '2015 - 2017',
+        ),
       ],
     ),
     ProfessionalItem(
@@ -54,6 +64,40 @@ class Constants {
           flipText:
               'Structural Inhibition studies on Mycobacterial Topoisomeases and DNA Gyrase',
         ),
+        CarouselItem(
+          title: 'Masters Project',
+          description: 'Sri Sathya Sai Institue of Higher Learning',
+          time: 'Apr 2021 - May 2022',
+          flipText:
+              'Genomic analysis of Fosfomycin resistance-conferring genes in Escherichia coli',
+        ),
+        CarouselItem(
+          title: 'Masters Project',
+          description: 'Sri Sathya Sai Institue of Higher Learning',
+          time: 'Jun 2020 - Feb 2021',
+          flipText:
+              'Identification of therapeutics from fungal metabolites for their application in combinatorial antibiotic therapy',
+        ),
+        CarouselItem(
+          title: 'Traineeship',
+          description: 'Acclin Path labs',
+          time: 'Mar 2020 - May 2020',
+          flipText:
+              'Screening clinical isolates for various disease markers including SARS-Cov2, HIV',
+        ),
+        CarouselItem(
+          title: 'Bachelors Project',
+          description: 'Sri Sathya Sai Institue of Higher Learning',
+          time: '',
+          flipText: 'Role of ADA in Osteoclast differentiation',
+        ),
+        CarouselItem(
+          title: 'Bachelors Project',
+          description: 'Sri Sathya Sai Institue of Higher Learning',
+          time: '',
+          flipText:
+              'A preliminary report on the Avifauna of the Brindavan Campus',
+        ),
       ],
     ),
     ProfessionalItem(
@@ -61,10 +105,15 @@ class Constants {
       iconImagePath: professionalPublicationsImagePath,
       itemsList: [
         CarouselItem(
-          title: 'Dummy Title',
-          description: 'Dummy Description',
-          time: 'Time Period',
-          link: 'https://sivaratnakar.com',
+          title:
+              'Identification and characterization of a new HNH restriction endonuclease with unusual properties',
+          time: '2023',
+          // link: 'https://sivaratnakar.com',
+        ),
+        CarouselItem(
+          title: 'Phage Therapy: Challenges and Opportunities',
+          time: '2022',
+          // link: 'https://sivaratnakar.com',
         ),
       ],
     ),
@@ -79,6 +128,10 @@ class Constants {
         CarouselItem(
           title: 'Gold Medal',
           time: '2022',
+        ),
+        CarouselItem(
+          title: 'Graduate Aptitude Test in Engineering,',
+          time: '2022, 2023',
         ),
       ],
     ),
