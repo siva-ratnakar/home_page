@@ -108,12 +108,12 @@ class Constants {
           title:
               'Identification and characterization of a new HNH restriction endonuclease with unusual properties',
           time: '2023',
-          // link: 'https://sivaratnakar.com',
+          link: 'https://link.springer.com/article/10.1007/s00253-023-12717-8',
         ),
         CarouselItem(
           title: 'Phage Therapy: Challenges and Opportunities',
           time: '2022',
-          // link: 'https://sivaratnakar.com',
+          link: 'https://openjournals.bsu.edu/finefocus/article/view/3631',
         ),
       ],
     ),
