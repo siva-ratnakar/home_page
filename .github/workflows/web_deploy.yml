@@ -19,7 +19,8 @@ jobs:
 
       - run: flutter clean
       - run: flutter pub get
-      - run: flutter build web --web-renderer canvaskit --release
+      # TODO: use canvaskit or wasm when supported --web-renderer
+      - run: flutter build web --release
 
       # Web deploy now is contained in build/web directory
       - run: |
