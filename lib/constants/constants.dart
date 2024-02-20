@@ -130,7 +130,7 @@ class Constants {
           time: '2022',
         ),
         CarouselItem(
-          title: 'Graduate Aptitude Test in Engineering,',
+          title: 'Graduate Aptitude Test in Engineering',
           time: '2022, 2023',
         ),
       ],

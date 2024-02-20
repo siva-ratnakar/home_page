@@ -331,14 +331,14 @@ class CardFront extends StatelessWidget {
       children: [
         Text(
           item.title,
-          style: Theme.of(context).textTheme.titleLarge!.copyWith(
+          style: Theme.of(context).textTheme.headlineLarge!.copyWith(
                 fontWeight: FontWeight.bold,
               ),
         ).center,
         if (item.description != null)
           Text(
             item.description!,
-            style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+            style: Theme.of(context).textTheme.titleLarge!.copyWith(
                   // TODO(immadisairaj): check the overflow
                   // situation with more text
                   overflow: TextOverflow.visible,
@@ -346,7 +346,7 @@ class CardFront extends StatelessWidget {
           ).center,
         Text(
           item.time,
-          style: Theme.of(context).textTheme.labelLarge!.copyWith(),
+          style: Theme.of(context).textTheme.bodyLarge!.copyWith(),
         ).center,
       ],
     );
