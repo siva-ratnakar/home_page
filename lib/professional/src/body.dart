@@ -106,7 +106,6 @@ class CarouselBodyWrapper extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       mainAxisSize: MainAxisSize.max,
       crossAxisAlignment: CrossAxisAlignment.stretch,
-      // TODO(immadisairaj): adjust icon button sizes
       children: [
         Center(
           child: IconButton(
