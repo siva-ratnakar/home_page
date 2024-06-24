@@ -6,7 +6,7 @@ Read more: https://developer.mozilla.org/en-US/docs/Web/Security/Secure_Contexts
 if (!window._flutter) {
   window._flutter = {};
 }
-_flutter.buildConfig = {"engineRevision":"f6344b75dcf861d8bf1f1322780b8811f982e31a","builds":[{"compileTarget":"dart2js","renderer":"canvaskit","mainJsPath":"main.dart.js"}]};
+_flutter.buildConfig = {"engineRevision":"edd8546116457bdf1c5bdfb13ecb9463d2bb5ed4","builds":[{"compileTarget":"dart2js","renderer":"canvaskit","mainJsPath":"main.dart.js"}]};
 
 
 // select loading div into a variable
@@ -88,7 +88,7 @@ function beginPreloading(manifestAssets) {
         // Download main.dart.js
         _flutter.loader.load({
             serviceWorkerSettings: {
-                serviceWorkerVersion: "4113047153",
+                serviceWorkerVersion: "3271408719",
             },
             onEntrypointLoaded: async function(engineInitializer) {
                 const appRunner = await engineInitializer.initializeEngine();
