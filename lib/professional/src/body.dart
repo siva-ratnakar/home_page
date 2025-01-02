@@ -77,7 +77,7 @@ class ProfessionalBody extends StatelessWidget {
         currentIndex: index,
       );
     }
-    final carouselController = CarouselController();
+    final carouselController = CarouselSliderController();
     return CarouselBodyWrapper(
       body: CarouselBody(
         key: Key('CAROUSEL_BODY_$index'),
@@ -98,7 +98,7 @@ class CarouselBodyWrapper extends StatelessWidget {
   });
 
   final CarouselBody body;
-  final CarouselController? carouselController;
+  final CarouselSliderController? carouselController;
 
   @override
   Widget build(BuildContext context) {
@@ -143,7 +143,7 @@ class CarouselBody extends StatefulWidget {
 
   final List<CarouselItem> items;
   final int currentIndex;
-  final CarouselController? carouselController;
+  final CarouselSliderController? carouselController;
 
   @override
   State<CarouselBody> createState() => _CarouselBodyState();
