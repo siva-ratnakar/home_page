@@ -7,7 +7,7 @@ class WholeDivider extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: Constants.titleBottomBorderWidth,
-      color: Theme.of(context).colorScheme.onBackground,
+      color: Theme.of(context).colorScheme.onSurface,
     );
   }
 }
@@ -94,8 +94,9 @@ class _FlipAnimationState extends State<FlipAnimation> {
         var tilt = ((animation.value - 0.5).abs() - 0.5) * 0.003;
         if (!_towardsLeft) tilt *= -1;
         tilt *= isUnder ? -1.0 : 1.0;
-        final value =
-            isUnder ? min(rotateAnim.value, pi / 2) : rotateAnim.value;
+        final value = isUnder
+            ? min(rotateAnim.value, pi / 2)
+            : rotateAnim.value;
         return Transform(
           transform: Matrix4.rotationY(value)..setEntry(3, 0, tilt),
           alignment: Alignment.center,
@@ -123,10 +124,7 @@ class GestureDetectorIfElseWrapper extends StatelessWidget {
     if (!gestureDetect) {
       return child;
     } else {
-      return GestureDetector(
-        onTap: onTap,
-        child: child,
-      );
+      return GestureDetector(onTap: onTap, child: child);
     }
   }
 }

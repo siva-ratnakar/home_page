@@ -43,7 +43,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       body: SizedBox(
         height: MediaQuery.sizeOf(context).height,
         width: MediaQuery.sizeOf(context).width,

@@ -39,7 +39,7 @@ class _ProfessionalPageState extends State<ProfessionalPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       body: SizedBox(
         height: MediaQuery.sizeOf(context).height,
         width: MediaQuery.sizeOf(context).width,
@@ -69,16 +69,11 @@ class UnderConstruction extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Placeholder(
-          color: color,
-        ),
+        Placeholder(color: color),
         Center(
           child: Text(
             'Please wait while we get data for you!',
-            style: TextStyle(
-              color: textColor,
-              fontSize: 16,
-            ),
+            style: TextStyle(color: textColor, fontSize: 16),
           ),
         ),
       ],

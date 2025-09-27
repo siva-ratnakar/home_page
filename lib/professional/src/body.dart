@@ -36,7 +36,8 @@ class ProfessionalBody extends StatelessWidget {
                       horizontal: horizontalSize,
                       vertical: verticalSize,
                     ),
-                    child: proffItems[index].itemsList == null ||
+                    child:
+                        proffItems[index].itemsList == null ||
                             proffItems[index].itemsList!.isEmpty
                         ? const UnderConstruction(
                             color: Colors.black12,
@@ -48,16 +49,11 @@ class ProfessionalBody extends StatelessWidget {
                 Align(
                   alignment: Alignment.topLeft,
                   child: Padding(
-                    padding: EdgeInsets.only(
-                      top: screenHeight * 0.05,
-                      left: 8,
-                    ),
+                    padding: EdgeInsets.only(top: screenHeight * 0.05, left: 8),
                     child: SizedBox(
                       width: backImageSize,
                       height: backImageSize,
-                      child: Image.asset(
-                        proffItems[index].iconImagePath,
-                      ),
+                      child: Image.asset(proffItems[index].iconImagePath),
                     ),
                   ),
                 ),
@@ -170,7 +166,7 @@ class _CarouselBodyState extends State<CarouselBody> {
     super.dispose();
   }
 
-  listener() {
+  void listener() {
     if (_scrollController.hasClients) {
       final currentOffset = _scrollController.offset;
       final maxOffset = _scrollController.position.maxScrollExtent;
@@ -234,11 +230,7 @@ class _CarouselBodyState extends State<CarouselBody> {
 }
 
 class CarouselChild extends StatelessWidget {
-  const CarouselChild({
-    super.key,
-    required this.items,
-    required this.index,
-  });
+  const CarouselChild({super.key, required this.items, required this.index});
 
   final List<CarouselItem> items;
   final int index;
@@ -262,63 +254,55 @@ class CarouselChild extends StatelessWidget {
         child: isFlippable
             ? FlipAnimation(
                 flipOnClickOnly: PlatformHelper.isWebMobile,
-                front: CardContentWrapper(
-                  child: CardFront(item: items[index]),
-                ),
+                front: CardContentWrapper(child: CardFront(item: items[index])),
                 back: CardContentWrapper(
                   child: Center(
                     child: Text(
                       items[index].flipText!,
                       style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                            fontWeight: FontWeight.bold,
-                          ),
+                        fontWeight: FontWeight.bold,
+                      ),
                     ).center,
                   ),
                 ),
               )
-            : CardContentWrapper(
-                child: CardFront(item: items[index]),
-              ),
+            : CardContentWrapper(child: CardFront(item: items[index])),
       ),
     );
   }
 }
 
 class CardContentWrapper extends StatelessWidget {
-  const CardContentWrapper({
-    super.key,
-    required this.child,
-  });
+  const CardContentWrapper({super.key, required this.child});
 
   final Widget child;
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(builder: (context, constraints) {
-      final cardHeight = constraints.maxHeight * 0.7;
-      final cardWidth = constraints.maxWidth * 0.9;
-      return Center(
-        child: Container(
-          decoration: BoxDecoration(
-            border: Border.all(),
-            borderRadius: const BorderRadius.all(Radius.circular(30)),
-            color: Theme.of(context).colorScheme.background,
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final cardHeight = constraints.maxHeight * 0.7;
+        final cardWidth = constraints.maxWidth * 0.9;
+        return Center(
+          child: Container(
+            decoration: BoxDecoration(
+              border: Border.all(),
+              borderRadius: const BorderRadius.all(Radius.circular(30)),
+              color: Theme.of(context).colorScheme.background,
+            ),
+            height: cardHeight,
+            width: cardWidth,
+            padding: const EdgeInsets.all(8),
+            child: child,
           ),
-          height: cardHeight,
-          width: cardWidth,
-          padding: const EdgeInsets.all(8),
-          child: child,
-        ),
-      );
-    });
+        );
+      },
+    );
   }
 }
 
 class CardFront extends StatelessWidget {
-  const CardFront({
-    super.key,
-    required this.item,
-  });
+  const CardFront({super.key, required this.item});
 
   final CarouselItem item;
 
@@ -332,18 +316,18 @@ class CardFront extends StatelessWidget {
           item.title,
           maxLines: 3,
           style: Theme.of(context).textTheme.headlineMedium!.copyWith(
-                fontWeight: FontWeight.bold,
-                overflow: TextOverflow.ellipsis,
-              ),
+            fontWeight: FontWeight.bold,
+            overflow: TextOverflow.ellipsis,
+          ),
         ).center,
         if (item.description != null)
           Text(
             item.description!,
             style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                  // TODO(immadisairaj): check the overflow
-                  // situation with more text
-                  overflow: TextOverflow.visible,
-                ),
+              // TODO(immadisairaj): check the overflow
+              // situation with more text
+              overflow: TextOverflow.visible,
+            ),
           ).center,
         Text(
           item.time,

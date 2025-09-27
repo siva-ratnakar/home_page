@@ -1,4 +1,4 @@
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 
 extension TextCenter on Text {
   Text get center => copyWith(textAlign: TextAlign.center);

@@ -7,30 +7,30 @@ class CircleWrapper extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(builder: (_, constraints) {
-      final size = min(constraints.maxHeight, constraints.maxWidth) * 0.3;
-      return Container(
-        height: size,
-        width: size,
-        alignment: Alignment.center,
-        clipBehavior: Clip.hardEdge,
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          border: Border.all(
-            color: Theme.of(context).colorScheme.onBackground,
-            width: Constants.homeCircleBorderWidth,
+    return LayoutBuilder(
+      builder: (_, constraints) {
+        final size = min(constraints.maxHeight, constraints.maxWidth) * 0.3;
+        return Container(
+          height: size,
+          width: size,
+          alignment: Alignment.center,
+          clipBehavior: Clip.hardEdge,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            border: Border.all(
+              color: Theme.of(context).colorScheme.onSurface,
+              width: Constants.homeCircleBorderWidth,
+            ),
           ),
-        ),
-        child: ClipOval(child: child),
-      );
-    });
+          child: ClipOval(child: child),
+        );
+      },
+    );
   }
 }
 
 class NameStack extends StatefulWidget {
-  const NameStack({
-    super.key,
-  });
+  const NameStack({super.key});
 
   @override
   State<NameStack> createState() => _NameStackState();
@@ -72,9 +72,7 @@ class _NameStackState extends State<NameStack> {
         onExit: (_) => setHoveredWeb(false),
         child: Stack(
           children: [
-            const Positioned.fill(
-              child: NameBack(),
-            ),
+            const Positioned.fill(child: NameBack()),
             const ImageWithAsset(asset: Constants.ownerImagePath)
                 .animate(target: _hovered ? 1 : 0)
                 .slideY(begin: -1, duration: Constants.defaultDuration),
@@ -128,79 +126,81 @@ class _MoveWrapperState extends State<MoveWrapper> {
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(builder: (context, constraints) {
-      // max height and max width is same
-      final localSize = constraints.maxHeight;
-      double percentageX = (localX / localSize) * 100;
-      double percentageY = (localY / localSize) * 100;
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        // max height and max width is same
+        final localSize = constraints.maxHeight;
+        double percentageX = (localX / localSize) * 100;
+        double percentageY = (localY / localSize) * 100;
 
-      double move = widget.moveOffset;
-      return MouseRegion(
-        onEnter: (event) => setState(() {
-          defaultPosition = false;
-        }),
-        onExit: (event) {
-          setState(() {
-            localX = Constants.bigWidgetSize / 2;
-            localY = Constants.bigWidgetSize / 2;
-            defaultPosition = true;
-          });
-        },
-        onHover: (event) {
-          if (mounted) {
+        double move = widget.moveOffset;
+        return MouseRegion(
+          onEnter: (event) => setState(() {
+            defaultPosition = false;
+          }),
+          onExit: (event) {
             setState(() {
-              defaultPosition = false;
+              localX = Constants.bigWidgetSize / 2;
+              localY = Constants.bigWidgetSize / 2;
+              defaultPosition = true;
             });
-          }
-          if (event.localPosition.dx > 0 && event.localPosition.dy > 0) {
-            if (event.localPosition.dx < localSize &&
-                event.localPosition.dy < localSize) {
+          },
+          onHover: (event) {
+            if (mounted) {
               setState(() {
-                localX = event.localPosition.dx;
-                localY = event.localPosition.dy;
+                defaultPosition = false;
               });
             }
-          }
-        },
-        child: Stack(
-          fit: StackFit.expand,
-          children: [
-            if (widget.isMovableOnTop) widget.nonMovable,
-            Transform(
-              transform: Matrix4.identity()
-                ..translate(
-                  defaultPosition || widget.moveOnlyTopBottom
-                      ? 0.0
-                      : (move * (percentageX / 50) + -move),
-                  defaultPosition || widget.moveOnlyLeftRight
-                      ? 0.0
-                      : (move * (percentageY / 50) + -move),
-                  0.0,
-                ),
-              alignment: FractionalOffset.center,
-              child: widget.movable,
-            ),
-            if (!widget.isMovableOnTop) widget.nonMovable,
-            if (widget.nonMovableCompleteTop != null)
-              widget.nonMovableCompleteTop!,
-            if (widget.movableCompleteTop != null)
+            if (event.localPosition.dx > 0 && event.localPosition.dy > 0) {
+              if (event.localPosition.dx < localSize &&
+                  event.localPosition.dy < localSize) {
+                setState(() {
+                  localX = event.localPosition.dx;
+                  localY = event.localPosition.dy;
+                });
+              }
+            }
+          },
+          child: Stack(
+            fit: StackFit.expand,
+            children: [
+              if (widget.isMovableOnTop) widget.nonMovable,
               Transform(
                 transform: Matrix4.identity()
                   ..translate(
-                    defaultPosition
+                    defaultPosition || widget.moveOnlyTopBottom
                         ? 0.0
-                        : -((move / 4) * (percentageX / 50) + -(move / 4)),
-                    defaultPosition
+                        : (move * (percentageX / 50) + -move),
+                    defaultPosition || widget.moveOnlyLeftRight
                         ? 0.0
-                        : -((move / 4) * (percentageY / 50) + -(move / 4)),
+                        : (move * (percentageY / 50) + -move),
                     0.0,
                   ),
                 alignment: FractionalOffset.center,
-                child: widget.movableCompleteTop,
+                child: widget.movable,
               ),
-          ],
-        ),
-      );
-    });
+              if (!widget.isMovableOnTop) widget.nonMovable,
+              if (widget.nonMovableCompleteTop != null)
+                widget.nonMovableCompleteTop!,
+              if (widget.movableCompleteTop != null)
+                Transform(
+                  transform: Matrix4.identity()
+                    ..translate(
+                      defaultPosition
+                          ? 0.0
+                          : -((move / 4) * (percentageX / 50) + -(move / 4)),
+                      defaultPosition
+                          ? 0.0
+                          : -((move / 4) * (percentageY / 50) + -(move / 4)),
+                      0.0,
+                    ),
+                  alignment: FractionalOffset.center,
+                  child: widget.movableCompleteTop,
+                ),
+            ],
+          ),
+        );
+      },
+    );
   }
 }

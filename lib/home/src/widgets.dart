@@ -14,10 +14,10 @@ class NameBack extends StatelessWidget {
             Constants.siteOwnerCircleName,
             textAlign: TextAlign.center,
             style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                  fontFamily: Constants.siteNameFontFamily,
-                  color: Theme.of(context).colorScheme.onBackground,
-                  fontWeight: FontWeight.bold,
-                ),
+              fontFamily: Constants.siteNameFontFamily,
+              color: Theme.of(context).colorScheme.onSurface,
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ),
       ),
@@ -32,10 +32,7 @@ class ImageWithAsset extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Image(
-      image: AssetImage(asset),
-      fit: BoxFit.cover,
-    );
+    return Image(image: AssetImage(asset), fit: BoxFit.cover);
   }
 }
 
@@ -58,7 +55,7 @@ class BigWidgetWrapper extends StatelessWidget {
       child: Container(
         height: Constants.bigWidgetSize,
         width: Constants.bigWidgetSize,
-        color: isTransparent ? null : Theme.of(context).colorScheme.background,
+        color: isTransparent ? null : Theme.of(context).colorScheme.surface,
         child: child,
       ),
     );
@@ -98,8 +95,10 @@ class _FooterIconState extends State<FooterIcon> {
 
   @override
   Widget build(BuildContext context) {
-    final size = min(MediaQuery.sizeOf(context).height * 0.08,
-        MediaQuery.sizeOf(context).width / 9);
+    final size = min(
+      MediaQuery.sizeOf(context).height * 0.08,
+      MediaQuery.sizeOf(context).width / 9,
+    );
     return MouseRegion(
       onEnter: (_) => setHoveredWeb(true),
       onExit: (_) => setHoveredWeb(false),
