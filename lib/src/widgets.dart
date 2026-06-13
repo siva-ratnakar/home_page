@@ -19,12 +19,14 @@ class FlipAnimation extends StatefulWidget {
     required this.back,
     this.towardsLeft = true,
     this.flipOnClickOnly = false,
+    this.onInteractionChanged,
   });
 
   final Widget front;
   final Widget back;
   final bool towardsLeft;
   final bool flipOnClickOnly;
+  final void Function(bool isInteracting)? onInteractionChanged;
 
   @override
   State<FlipAnimation> createState() => _FlipAnimationState();
@@ -53,6 +55,7 @@ class _FlipAnimationState extends State<FlipAnimation> {
     setState(() {
       _hovered = hovered;
     });
+    widget.onInteractionChanged?.call(hovered);
   }
 
   changeOnFlip() {
@@ -62,6 +65,7 @@ class _FlipAnimationState extends State<FlipAnimation> {
     setState(() {
       _hovered = !_hovered;
     });
+    widget.onInteractionChanged?.call(_hovered);
   }
 
   @override

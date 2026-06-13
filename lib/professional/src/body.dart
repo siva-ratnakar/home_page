@@ -150,6 +150,14 @@ class _CarouselBodyState extends State<CarouselBody> {
   final sections = Constants.professionalItems.length;
 
   late bool _isVisible;
+  bool _isInteracting = false;
+
+  void _setInteracting(bool isInteracting) {
+    if (_isInteracting == isInteracting) return;
+    setState(() {
+      _isInteracting = isInteracting;
+    });
+  }
 
   @override
   void initState() {
@@ -208,6 +216,7 @@ class _CarouselBodyState extends State<CarouselBody> {
             key: Key('CAROUSEL_CHILD_$index'),
             items: widget.items,
             index: index,
+            onInteractionChanged: _setInteracting,
           );
         },
         options: CarouselOptions(
@@ -217,7 +226,7 @@ class _CarouselBodyState extends State<CarouselBody> {
           enableInfiniteScroll: false,
           pauseAutoPlayOnTouch: true,
           pauseAutoPlayOnManualNavigate: true,
-          autoPlay: _isVisible,
+          autoPlay: _isVisible && !_isInteracting,
           autoPlayCurve: Curves.easeInOut,
           autoPlayInterval: Constants.carouselIntervalDuration,
           enlargeCenterPage: true,
@@ -230,10 +239,16 @@ class _CarouselBodyState extends State<CarouselBody> {
 }
 
 class CarouselChild extends StatelessWidget {
-  const CarouselChild({super.key, required this.items, required this.index});
+  const CarouselChild({
+    super.key,
+    required this.items,
+    required this.index,
+    this.onInteractionChanged,
+  });
 
   final List<CarouselItem> items;
   final int index;
+  final void Function(bool isInteracting)? onInteractionChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -254,7 +269,10 @@ class CarouselChild extends StatelessWidget {
         child: isFlippable
             ? FlipAnimation(
                 flipOnClickOnly: PlatformHelper.isWebMobile,
-                front: CardContentWrapper(child: CardFront(item: items[index])),
+                onInteractionChanged: onInteractionChanged,
+                front: CardContentWrapper(
+                  child: CardFront(item: items[index]),
+                ),
                 back: CardContentWrapper(
                   child: Center(
                     child: Text(
@@ -272,28 +290,55 @@ class CarouselChild extends StatelessWidget {
   }
 }
 
-class CardContentWrapper extends StatelessWidget {
+class CardContentWrapper extends StatefulWidget {
   const CardContentWrapper({super.key, required this.child});
 
   final Widget child;
 
   @override
+  State<CardContentWrapper> createState() => _CardContentWrapperState();
+}
+
+class _CardContentWrapperState extends State<CardContentWrapper> {
+  bool _hovered = false;
+
+  void _setHovered(bool hovered) {
+    if (_hovered == hovered) return;
+    setState(() {
+      _hovered = hovered;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) {
-        final cardHeight = constraints.maxHeight * 0.7;
-        final cardWidth = constraints.maxWidth * 0.9;
+        final cardHeight = constraints.maxHeight * 0.82;
+        final cardWidth = constraints.maxWidth * 0.96;
         return Center(
-          child: Container(
-            decoration: BoxDecoration(
-              border: Border.all(),
-              borderRadius: const BorderRadius.all(Radius.circular(30)),
-              color: Theme.of(context).colorScheme.background,
+          child: MouseRegion(
+            onEnter: (_) => _setHovered(true),
+            onExit: (_) => _setHovered(false),
+            child: Container(
+              decoration: BoxDecoration(
+                border: Border.all(),
+                borderRadius: const BorderRadius.all(Radius.circular(30)),
+                color: Theme.of(context).colorScheme.background,
+                boxShadow: _hovered
+                    ? [
+                        BoxShadow(
+                          color: Colors.black.withValues(alpha: 0.08),
+                          blurRadius: 16,
+                          offset: const Offset(0, 8),
+                        ),
+                      ]
+                    : null,
+              ),
+              height: cardHeight,
+              width: cardWidth,
+              padding: const EdgeInsets.all(8),
+              child: widget.child,
             ),
-            height: cardHeight,
-            width: cardWidth,
-            padding: const EdgeInsets.all(8),
-            child: child,
           ),
         );
       },
@@ -308,32 +353,62 @@ class CardFront extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Text(
-          item.title,
-          maxLines: 3,
-          style: Theme.of(context).textTheme.headlineMedium!.copyWith(
-            fontWeight: FontWeight.bold,
-            overflow: TextOverflow.ellipsis,
-          ),
-        ).center,
-        if (item.description != null)
-          Text(
-            item.description!,
-            style: Theme.of(context).textTheme.titleMedium!.copyWith(
-              // TODO(immadisairaj): check the overflow
-              // situation with more text
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final hasDescription = item.description != null;
+        final titleStyle = Theme.of(context).textTheme.headlineMedium!.copyWith(
+          fontWeight: FontWeight.bold,
+          fontSize: min(constraints.maxHeight * 0.18, 34),
+          overflow: TextOverflow.ellipsis,
+        );
+        final descriptionStyle = Theme.of(context).textTheme.titleMedium!
+            .copyWith(
+              fontSize: min(constraints.maxHeight * 0.1, 24),
               overflow: TextOverflow.visible,
+            );
+        final timeStyle = Theme.of(context).textTheme.bodyMedium!.copyWith(
+          fontSize: min(constraints.maxHeight * 0.08, 20),
+        );
+
+        return Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Expanded(
+              flex: hasDescription ? 4 : 5,
+              child: Center(
+                child: Text(
+                  item.title,
+                  maxLines: 4,
+                  textAlign: TextAlign.center,
+                  style: titleStyle,
+                ),
+              ),
             ),
-          ).center,
-        Text(
-          item.time,
-          style: Theme.of(context).textTheme.bodyMedium!.copyWith(),
-        ).center,
-      ],
+            if (hasDescription)
+              Expanded(
+                flex: 2,
+                child: Center(
+                  child: Text(
+                    item.description!,
+                    textAlign: TextAlign.center,
+                    style: descriptionStyle,
+                  ),
+                ),
+              ),
+            Expanded(
+              flex: 1,
+              child: Center(
+                child: Text(
+                  item.time,
+                  textAlign: TextAlign.center,
+                  style: timeStyle,
+                ),
+              ),
+            ),
+          ],
+        );
+      },
     );
   }
 }

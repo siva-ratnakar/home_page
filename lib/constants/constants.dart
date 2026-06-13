@@ -58,6 +58,12 @@ class Constants {
       iconImagePath: professionalExperienceImagePath,
       itemsList: [
         CarouselItem(
+          title: 'PhD Project',
+          description: 'Friedrich Miescher Institute for Biomedical Research',
+          time: '2023 - Present',
+          flipText: 'Genetic architecture of Protein-Peptide interactions',
+        ),
+        CarouselItem(
           title: 'Junior Research Fellow',
           description: 'Indian Institute of Science',
           time: 'Jun 2022 - Sep 2023',
@@ -106,6 +112,12 @@ class Constants {
       itemsList: [
         CarouselItem(
           title:
+              'Inhibition of DNA cleavage and strand passage activities of Mycobacterium tuberculosis topoisomerase I',
+          time: '2025',
+          link: 'https://doi.org/10.1093/nar/gkaf929',
+        ),
+        CarouselItem(
+          title:
               'Identification and characterization of a new HNH restriction endonuclease with unusual properties',
           time: '2023',
           link: 'https://link.springer.com/article/10.1007/s00253-023-12717-8',
@@ -117,6 +129,7 @@ class Constants {
         ),
       ],
     ),
+    /*
     ProfessionalItem(
       title: 'Awards',
       iconImagePath: professionalAwardsImagePath,
@@ -135,6 +148,7 @@ class Constants {
         ),
       ],
     ),
+    */
   ];
 
   // Home Life component related constants
